@@ -1,0 +1,20 @@
+{
+  "banxingList": [
+    "1KN001"
+  ],
+  "chimaSize": "175",
+  "fabricWidth": 74,
+  "customerName": "AIET算料",
+  "customerCode": "cs",
+  "clientName": "ET算料",
+  "fabricNo": "ET算料",
+  "liningNo": "ET算料",
+  "color": "10-黑",
+  "fabricStyle": "平板",
+  "fabricSupply": "面料客供",
+  "sleeveLining": "ET算料",
+  "fabricPrice": 0,
+  "processingFee": 0,
+  "startSerial": 30000,
+  "resetSerial": false
+}
