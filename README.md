@@ -11,18 +11,36 @@
 - 修改定制选项
 - 确认下单
 - ET导出管理2页面操作
+- 获取面料耗量
 
 ## 环境要求
 
 - Python 3.8+
-- Chrome浏览器 147.x
-- ChromeDriver 147.x
+- Chrome浏览器（最新版）
+
+## 登录信息
+
+| 项目 | 值 |
+|------|-----|
+| **网站地址** | `https://scm.ceyadi.cn/` |
+| **用户名** | `AI下单` |
+| **密码** | `123456` |
 
 ## 安装依赖
 
 ```bash
-pip install selenium openpyxl webdriver-manager
+pip install -r requirements.txt
 ```
+
+## ChromeDriver说明
+
+脚本已集成 `webdriver-manager`，会自动：
+
+1. 检测你的Chrome浏览器版本
+2. 自动下载匹配的ChromeDriver
+3. 无需手动安装ChromeDriver
+
+如果需要使用指定版本的ChromeDriver，可以将 `chromedriver-147/` 目录放置在项目根目录。
 
 ## 运行方式
 
@@ -35,10 +53,11 @@ python scm_order_et_export.py
 ```
 Material/
 ├── scm_order_et_export.py    # 主测试脚本
-├── chromedriver-147/         # ChromeDriver
+├── chromedriver-147/         # 可选：指定版本ChromeDriver
 ├── config.json               # 配置文件
 ├── serial_counter.txt        # 流水号计数器
-└── requirements.txt          # 依赖清单
+├── requirements.txt          # 依赖清单
+└── README.md                 # 项目说明
 ```
 
 ## 测试流程
@@ -52,10 +71,17 @@ Material/
    - 修改定制选项
    - 填写量体信息
    - 保存明细
-6. 返回生产下单管理页面
-7. 点击确认下单（处理确认弹窗）
-8. 进入ET导出管理2页面
-9. 找到订单并完成编辑确认
+6. 读取并保存生产单号
+7. 保存主表订单
+8. 返回生产下单管理页面
+9. 搜索订单并点击确认下单（处理确认弹窗）
+10. 进入ET导出管理2页面
+11. 搜索订单并完成编辑确认
+12. 等待10分钟（系统计算面料耗量）
+13. 返回生产下单管理页面
+14. 搜索订单并点击详情
+15. 获取面料耗量
+16. 发送给OpenClaw
 
 ## 配置说明
 
@@ -106,3 +132,4 @@ Material/
 - `6KN368` - 西裤
 - `4KN001` - 大衣
 - `5KN001` - 马甲
+
