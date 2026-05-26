@@ -11,9 +11,8 @@ import json
 import os
 import traceback
 
-# 手动指定ChromeDriver路径（如果不想用自动下载）
-# 请将下面的路径改为你实际解压的路径
-CHROMEDRIVER_PATH = r'e:\111\Material\chromedriver-147\chromedriver.exe'
+# 手动指定ChromeDriver路径（使用本地ChromeDriver）
+CHROMEDRIVER_PATH = r'f:\scm_order_et_export-main\chromedriver-147\chromedriver.exe'
 
 try:
     from webdriver_manager.chrome import ChromeDriverManager
@@ -42,7 +41,7 @@ class TestFullProcess:
         
         try:
             # 优先使用手动指定的ChromeDriver
-            if os.path.exists(CHROMEDRIVER_PATH):
+            if CHROMEDRIVER_PATH and os.path.exists(CHROMEDRIVER_PATH):
                 print(f"\n使用本地ChromeDriver: {CHROMEDRIVER_PATH}")
                 service = Service(CHROMEDRIVER_PATH)
                 self.driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -78,7 +77,8 @@ class TestFullProcess:
     
     def load_serial_counter(self):
         """从文件加载上次保存的流水号"""
-        serial_file = r'e:\111\Material\serial_counter.txt'
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        serial_file = os.path.join(script_dir, 'serial_counter.txt')
         try:
             with open(serial_file, 'r') as f:
                 value = int(f.read().strip())
@@ -90,7 +90,8 @@ class TestFullProcess:
     
     def save_serial_counter(self):
         """保存当前流水号到文件"""
-        serial_file = r'e:\111\Material\serial_counter.txt'
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        serial_file = os.path.join(script_dir, 'serial_counter.txt')
         try:
             with open(serial_file, 'w') as f:
                 f.write(str(self.serial_counter))
@@ -100,46 +101,83 @@ class TestFullProcess:
     
     def load_banxing_from_config(self):
         """从config.json读取版型配置"""
-        config_file = r'e:\111\Material\config.json'
+        # 使用脚本所在目录下的config.json
+        import os
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        config_file = os.path.join(script_dir, 'config.json')
         default_banxing_list = [
-            {'banxing': '1KN001', 'chima_size': '50', 'luocha': 'R', 'custom_options': {'手巾袋': '无'}}
+            {'banxing': '1KN001', 'chima_size': '50', 'luocha': 'R', 'custom_options': {'手巾袋': '无'},
+             'fabric_width': 74, 'fabric_no': 'ET算料', 'fabric_style': '平板'}
         ]
         
         try:
             with open(config_file, 'r', encoding='utf-8') as f:
                 config = json.load(f)
             
+            # 保存配置到实例变量供其他方法使用
+            self.config = config
+            
             banxing_list = []
-            banxing_codes = config.get('banxingList', [])
-            default_chima_size = config.get('chimaSize', '50')
+            # 优先使用 banxingConfigs 配置（支持每个版型独立配置）
+            banxing_configs = config.get('banxingConfigs', [])
             
-            for banxing_code in banxing_codes:
-                style_type = self.get_style_type(banxing_code)
-                # 根据版型类型设置默认参数
-                if style_type == '西裤':
-                    luocha = '-'
-                    custom_options = {'脚口': '反撬', '脚口反撬': '2'}
-                elif style_type == '马甲':
-                    luocha = '-'
-                    custom_options = {'马甲后背': '里布', '马甲后叉': '中开叉', '手巾袋': '无', '下开袋': '无'}
-                elif style_type == '大衣':
-                    luocha = 'R'
-                    custom_options = {'工艺': '半麻衬', '大衣面袋': '无', '手巾袋': '无', '大衣袖扣': '一扣',
-                                     '袖口锁眼': '一扣', '后背款式': 'A款', '门襟锁眼': '一明扣三暗扣',
-                                     '半里': '锁边翘边', '猎装': '腰带款', '驳头锁眼': '艾伦眼',
-                                     '艾伦眼颜色': '顺色', '米兰眼颜色': '顺色'}
-                else:  # 上衣
-                    luocha = 'R'
-                    custom_options = {'手巾袋': '无'}
+            if banxing_configs:
+                # 使用新的配置格式
+                for banxing_config in banxing_configs:
+                    banxing_code = banxing_config.get('banxing')
+                    if not banxing_code:
+                        continue
+                    
+                    style_type = self.get_style_type(banxing_code)
+                    
+                    # 获取版型独立配置，若无则使用全局默认值
+                    banxing_list.append({
+                        'banxing': banxing_code,
+                        'chima_size': banxing_config.get('chimaSize', config.get('chimaSize', '50')),
+                        'luocha': banxing_config.get('luocha', '-' if style_type == '西裤' or style_type == '马甲' else 'R'),
+                        'custom_options': banxing_config.get('customOptions', {}),
+                        'fabric_width': banxing_config.get('fabricWidth', config.get('fabricWidth', 74)),
+                        'fabric_no': banxing_config.get('fabricNo', config.get('fabricNo', 'ET算料')),
+                        'fabric_style': banxing_config.get('fabricStyle', config.get('fabricStyle', '平板')),
+                        'liangti_data': banxing_config.get('liangtiData', {})
+                    })
                 
-                banxing_list.append({
-                    'banxing': banxing_code,
-                    'chima_size': default_chima_size,
-                    'luocha': luocha,
-                    'custom_options': custom_options
-                })
+                print(f'  ✓ 从配置文件读取 {len(banxing_list)} 个版型配置')
+            else:
+                # 兼容旧的配置格式
+                banxing_codes = config.get('banxingList', [])
+                default_chima_size = config.get('chimaSize', '50')
+                
+                for banxing_code in banxing_codes:
+                    style_type = self.get_style_type(banxing_code)
+                    if style_type == '西裤':
+                        luocha = '-'
+                        custom_options = config.get('customOptions', {}).get('西裤', {'脚口': '反撬', '脚口反撬': '2'})
+                    elif style_type == '马甲':
+                        luocha = '-'
+                        custom_options = config.get('customOptions', {}).get('马甲', {'马甲后背': '里布', '马甲后叉': '中开叉', '手巾袋': '无', '下开袋': '无'})
+                    elif style_type == '大衣':
+                        luocha = 'R'
+                        custom_options = config.get('customOptions', {}).get('大衣', {'工艺': '半麻衬', '大衣面袋': '无', '手巾袋': '无', '大衣袖扣': '一扣',
+                                         '袖口锁眼': '一扣', '后背款式': 'A款', '门襟锁眼': '一明扣三暗扣',
+                                         '半里': '锁边翘边', '猎装': '腰带款', '驳头锁眼': '艾伦眼',
+                                         '艾伦眼颜色': '顺色', '米兰眼颜色': '顺色'})
+                    else:
+                        luocha = 'R'
+                        custom_options = config.get('customOptions', {}).get('上衣', {})
+                    
+                    banxing_list.append({
+                        'banxing': banxing_code,
+                        'chima_size': default_chima_size,
+                        'luocha': luocha,
+                        'custom_options': custom_options,
+                        'fabric_width': config.get('fabricWidth', 74),
+                        'fabric_no': config.get('fabricNo', 'ET算料'),
+                        'fabric_style': config.get('fabricStyle', '平板')
+                    })
+                
+                print(f'  ✓ 从配置文件读取 {len(banxing_list)} 个版型: {banxing_codes}')
             
-            print(f'  ✓ 从配置文件读取 {len(banxing_list)} 个版型: {banxing_codes}')
             return banxing_list
         
         except Exception as e:
@@ -155,15 +193,12 @@ class TestFullProcess:
         return str(self.serial_counter)
     
     def get_style_type(self, banxing):
-        if banxing.startswith('1KN'):
-            return '上衣'
-        elif banxing.startswith('6KN'):
-            return '西裤'
-        elif banxing.startswith('4KN'):
-            return '大衣'
-        elif banxing.startswith('5KN'):
-            return '马甲'
-        type_map = {'1': '上衣', '4': '大衣', '5': '马甲', '6': '西裤'}
+        type_map = {
+            '1': '上衣',
+            '4': '大衣',
+            '5': '马甲',
+            '6': '西裤'
+        }
         return type_map.get(banxing[0], '上衣')
     
     def login(self):
@@ -502,7 +537,7 @@ class TestFullProcess:
         
         return save_success
     
-    def add_detail(self, banxing, chima_size):
+    def add_detail(self, banxing, chima_size, fabric_width=None, fabric_no=None, fabric_style=None):
         print('=' * 50)
         print(f'【5】新增版型：{banxing}')
         print('=' * 50)
@@ -556,13 +591,23 @@ class TestFullProcess:
         print(f'  流水号：{serial_num}')
         
         style_type = self.get_style_type(banxing)
-        fabric_width = 74
-        fabric_no = 'ET 算料'
-        lining_no = 'ET 算料'
-        color = '10-黑'
-        fabric_style = '平板'
-        fabric_supply = '库存面料'
-        sleeve_lining = 'ET 算料'
+        # 优先使用传入的参数，若无则从配置文件读取，最后使用默认值
+        if hasattr(self, 'config'):
+            fabric_width = fabric_width if fabric_width is not None else self.config.get('fabricWidth', 74)
+            fabric_no = fabric_no if fabric_no is not None else self.config.get('fabricNo', 'ET 算料')
+            lining_no = self.config.get('liningNo', 'ET 算料')
+            color = self.config.get('color', '10-黑')
+            fabric_style = fabric_style if fabric_style is not None else self.config.get('fabricStyle', '平板')
+            fabric_supply = self.config.get('fabricSupply', '库存面料')
+            sleeve_lining = self.config.get('sleeveLining', 'ET 算料')
+        else:
+            fabric_width = fabric_width if fabric_width is not None else 74
+            fabric_no = fabric_no if fabric_no is not None else 'ET 算料'
+            lining_no = 'ET 算料'
+            color = '10-黑'
+            fabric_style = fabric_style if fabric_style is not None else '平板'
+            fabric_supply = '库存面料'
+            sleeve_lining = 'ET 算料'
         
         print('  开始填写各字段...')
         self.fill_dropdown('款式类型', style_type)
@@ -1009,11 +1054,11 @@ class TestFullProcess:
         
         print('✓ 定制选项修改完成\n')
     
-    def enter_liangti_info(self, chima_size, style_type, luocha=None):
+    def enter_liangti_info(self, chima_size, style_type, luocha=None, liangti_data=None):
         print('【7】填写量体信息...')
         
-        # 确定尺码和落差的值
-        target_chima = '50'
+        # 确定尺码和落差的值 - 使用传入的参数
+        target_chima = chima_size if chima_size else '50'
         target_luocha = 'R'
         
         # 如果传入了luocha参数，使用传入的值
@@ -1023,6 +1068,10 @@ class TestFullProcess:
             target_luocha = '-'
         
         print(f'  目标尺码：{target_chima}, 目标落差：{target_luocha}')
+        
+        # 如果有量体数据，打印出来
+        if liangti_data:
+            print(f'  量体数据：{liangti_data}')
         
         for i in range(5):
             self.driver.execute_script("""
@@ -1094,6 +1143,7 @@ class TestFullProcess:
                 pass
         
         # 查找落差字段
+        luocha_options = []
         form_items2 = self.driver.find_elements(By.CSS_SELECTOR, '.el-form-item')
         for item in form_items2:
             try:
@@ -1117,17 +1167,37 @@ class TestFullProcess:
                             options = self.driver.find_elements(By.CSS_SELECTOR, '.el-select-dropdown__item')
                         
                         print(f'    找到 {len(options)} 个落差选项')
+                        
+                        # 收集所有可用的落差选项
+                        available_luocha = []
                         for opt in options:
                             try:
                                 opt_text = self.driver.execute_script('return arguments[0].innerText;', opt)
                                 if opt_text and opt_text.strip() in ['R', 'C', '-']:
-                                    if opt_text.strip() == target_luocha:
-                                        self.driver.execute_script("arguments[0].click();", opt)
-                                        print(f'  ✓ 落差选择：{target_luocha}')
-                                        luocha_found = True
-                                        break
+                                    available_luocha.append({'elem': opt, 'text': opt_text.strip()})
                             except:
                                 pass
+                        
+                        print(f'    可用落差选项：{[o["text"] for o in available_luocha]}')
+                        
+                        # 按优先级选择：先选目标，再按 R -> C -> - 顺序尝试
+                        luocha_priority = ['R', 'C', '-']
+                        
+                        # 如果目标在优先级列表中，放到最前面
+                        if target_luocha in luocha_priority:
+                            luocha_priority.remove(target_luocha)
+                            luocha_priority.insert(0, target_luocha)
+                        
+                        # 按优先级尝试选择
+                        for priority_luocha in luocha_priority:
+                            for opt in available_luocha:
+                                if opt['text'] == priority_luocha:
+                                    self.driver.execute_script("arguments[0].click();", opt['elem'])
+                                    print(f'  ✓ 落差选择：{priority_luocha}')
+                                    luocha_found = True
+                                    break
+                            if luocha_found:
+                                break
                     break
             except:
                 pass
@@ -1184,6 +1254,391 @@ class TestFullProcess:
                 pass
         
         sleep(2000)
+        
+        # 填写具体的量体数据
+        if liangti_data and len(liangti_data) > 0:
+            print('  填写具体量体数据...')
+            # 加载量体部位映射表
+            import os
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+            mapping_file = os.path.join(script_dir, '映射配置.json')
+            liangti_mapping = {}
+            try:
+                with open(mapping_file, 'r', encoding='utf-8-sig') as f:
+                    mapping = json.load(f)
+                    liangti_mapping = mapping.get('量体部位映射', {})
+                print(f'  ✓ 量体部位映射表加载成功，共 {len(liangti_mapping)} 个部位')
+            except Exception as e:
+                print(f'  ! 量体部位映射表加载失败：{e}')
+            
+            print(f'  待处理的量体数据：{liangti_data}')
+            
+            # 遍历量体数据，填写每个字段
+            for field_code, field_value in liangti_data.items():
+                # 获取字段的中文名称
+                mapped_info = liangti_mapping.get(field_code, {})
+                field_name = mapped_info.get('名称', field_code)
+                field_candidates = [field_name, field_code]
+                english_name = mapped_info.get('英文')
+                if english_name:
+                    field_candidates.append(english_name.strip())
+                if field_name.startswith('全') and len(field_name) > 1:
+                    field_candidates.append(field_name[1:])
+                if field_name.startswith('净') and len(field_name) > 1:
+                    field_candidates.append(field_name[1:])
+                field_candidates = [name for name in dict.fromkeys(field_candidates) if name]
+                print(f'    处理量体字段：[{field_code}] -> [{field_name}] = {field_value}')
+                
+                # 查找量体字段 - 使用 ElementUI InputNumber 组件，点击 + - 按钮
+                field_found = False
+                try:
+                    # 解析 value，比如 "+5" 或 "-3"
+                    field_value_str = str(field_value).strip()
+                    is_plus = not field_value_str.startswith('-')
+                    num = int(field_value_str.replace('+', '').replace('-', ''))
+                    
+                    # 使用JS查找并点击 - ElementUI 表格的表头/表体通常是分离的，必须按列名定位
+                    fill_result = self.driver.execute_script("""
+                        const fieldName = arguments[0];
+                        const isPlus = arguments[1];
+                        const num = arguments[2];
+                        const fieldCandidates = arguments[3] || [fieldName];
+                        
+                        console.log('========== 开始查找量体字段：', fieldName, fieldCandidates, '==========');
+                        
+                        // 1. 先找到量体信息对话框。页面会同时保留多个弹窗 DOM，必须按量体关键词和层级选最像的那个。
+                        let liangtiDialog = null;
+                        const dialogs = document.querySelectorAll('.el-dialog, .el-drawer');
+                        console.log('找到', dialogs.length, '个对话框');
+                        const visibleDialogs = [];
+
+                        for (let i = 0; i < dialogs.length; i++) {
+                            const dialog = dialogs[i];
+                            const dialogStyle = window.getComputedStyle(dialog);
+                            if (dialogStyle.display === 'none' || dialogStyle.visibility === 'hidden') continue;
+                            const rect = dialog.getBoundingClientRect();
+                            if (rect.width <= 0 || rect.height <= 0) continue;
+
+                            const title = dialog.querySelector('.el-dialog__title, .el-drawer__title');
+                            const titleText = title ? title.textContent.trim() : '';
+                            const dialogText = dialog.innerText || dialog.textContent || '';
+                            const zIndex = parseInt(dialogStyle.zIndex || '0', 10) || 0;
+
+                            let score = 0;
+                            if (titleText.includes('录入量体数据')) score += 200;
+                            if (titleText.includes('量体')) score += 120;
+                            if (dialogText.includes('量体部位')) score += 100;
+                            if (dialogText.includes('调整尺寸')) score += 80;
+                            if (dialogText.includes('标准尺寸')) score += 40;
+                            if (dialogText.includes('特体部位')) score += 40;
+                            if (dialogText.includes('落差') && dialogText.includes('尺码')) score += 30;
+                            if (dialogText.includes(fieldName)) score += 30;
+                            if (dialogText.includes('驳头类型') || dialogText.includes('纽扣数量') || dialogText.includes('里布结构')) score -= 80;
+
+                            visibleDialogs.push({ dialog, index: i, titleText, score, zIndex, textPreview: dialogText.slice(0, 120) });
+                        }
+
+                        visibleDialogs.sort((a, b) => (b.score - a.score) || (b.zIndex - a.zIndex) || (b.index - a.index));
+                        for (const info of visibleDialogs) {
+                            console.log('对话框候选[' + info.index + ']: 标题="' + info.titleText + '", score=' + info.score + ', zIndex=' + info.zIndex + ', 内容预览="' + info.textPreview + '"');
+                        }
+                        const bestDialog = visibleDialogs.find(info => info.score > 0);
+                        if (bestDialog) {
+                            liangtiDialog = bestDialog.dialog;
+                            console.log('✓ 选择量体对话框:', bestDialog.index, bestDialog.titleText, 'score=', bestDialog.score);
+                        }
+                        
+                        // 如果没找到对话框，尝试全局查找
+                        const searchScope = liangtiDialog || document;
+                        console.log('搜索范围:', liangtiDialog ? '量体对话框内' : '全局');
+                        
+                        const getText = (el) => (el ? (el.innerText || el.textContent || '').trim() : '');
+                        const normalizeText = (text) => (text || '').replace(/\\s+/g, '').replace(/[()（）]/g, '').trim();
+                        const normalizedCandidates = fieldCandidates.map(normalizeText).filter(Boolean);
+                        const textMatches = (text) => {
+                            const normalizedText = normalizeText(text);
+                            if (!normalizedText) return false;
+                            return normalizedCandidates.some(candidate =>
+                                normalizedText === candidate ||
+                                normalizedText.includes(candidate) ||
+                                candidate.includes(normalizedText)
+                            );
+                        };
+                        const isVisible = (el) => {
+                            if (!el) return false;
+                            const style = window.getComputedStyle(el);
+                            const rect = el.getBoundingClientRect();
+                            return style.display !== 'none' && style.visibility !== 'hidden' && rect.width > 0 && rect.height > 0;
+                        };
+                        const findColumnIndex = (headers, keywords) => {
+                            for (let i = 0; i < headers.length; i++) {
+                                const text = getText(headers[i]).replace(/\\s+/g, '');
+                                console.log('表头:', i, text);
+                                if (keywords.some(keyword => text.includes(keyword))) return i;
+                            }
+                            return -1;
+                        };
+                        
+                        // 2. ElementUI el-table 的 header/body 是两个 table，先按 el-table 容器精确定位
+                        let targetRow = null;
+                        let targetCellIndex = -1;
+                        let targetCell = null;
+                        const visiblePartNames = [];
+                        
+                        console.log('方法1: 按 ElementUI 表格列名查找...');
+                        const elTables = Array.from(searchScope.querySelectorAll('.el-table')).filter(isVisible);
+                        console.log('找到', elTables.length, '个可见 el-table');
+                        
+                        for (let table of elTables) {
+                            let headers = table.querySelectorAll('.el-table__header-wrapper th');
+                            if (!headers.length) {
+                                headers = table.querySelectorAll('.el-table__fixed-header-wrapper th');
+                            }
+                            if (!headers.length) continue;
+                            
+                            const liangtiColumnIndex = findColumnIndex(headers, ['量体部位', '部位']);
+                            const adjustColumnIndex = findColumnIndex(headers, ['调整尺寸', '调整']);
+                            
+                            if (liangtiColumnIndex >= 0 && adjustColumnIndex >= 0) {
+                                console.log('✓ 找到量体表格列，量体部位列:', liangtiColumnIndex, '调整尺寸列:', adjustColumnIndex);
+                                
+                                const wrappers = Array.from(table.querySelectorAll('.el-table__body-wrapper'));
+                                if (!wrappers.length) {
+                                    wrappers.push(...table.querySelectorAll('.el-table__fixed-body-wrapper'));
+                                }
+                                const scrollPositions = [0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1];
+                                for (let wrapper of wrappers) {
+                                    for (let pos of scrollPositions) {
+                                        if (wrapper.scrollHeight > wrapper.clientHeight) {
+                                            wrapper.scrollTop = Math.floor((wrapper.scrollHeight - wrapper.clientHeight) * pos);
+                                        }
+                                        const rows = wrapper.querySelectorAll('tbody tr');
+                                        for (let i = 0; i < rows.length; i++) {
+                                            const cells = rows[i].querySelectorAll('td, th');
+                                            if (cells.length > liangtiColumnIndex) {
+                                                const cellText = getText(cells[liangtiColumnIndex]);
+                                                const normalizedCellText = normalizeText(cellText);
+                                                if (normalizedCellText) visiblePartNames.push(normalizedCellText);
+                                                console.log('检查行:', i, normalizedCellText);
+                                                if (textMatches(cellText)) {
+                                                    targetRow = rows[i];
+                                                    targetCellIndex = adjustColumnIndex;
+                                                    targetCell = cells[adjustColumnIndex] || null;
+                                                    console.log('✓ 找到目标行:', fieldName, '实际文本:', cellText);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        if (targetRow) break;
+                                    }
+                                    if (targetRow) break;
+                                }
+                                if (targetRow) break;
+                            }
+                        }
+                        
+                        // 兼容普通 table：表头和表体在同一个 table 内
+                        if (!targetRow) {
+                            console.log('方法2: 查找普通 table...');
+                            const allTables = searchScope.querySelectorAll('table');
+                            for (let table of allTables) {
+                                const rows = table.querySelectorAll('tr');
+                                if (rows.length < 2) continue;
+                                
+                                const headerCells = rows[0].querySelectorAll('th, td');
+                                const liangtiColumnIndex = findColumnIndex(headerCells, ['量体部位', '部位']);
+                                const adjustColumnIndex = findColumnIndex(headerCells, ['调整尺寸', '调整']);
+                                if (liangtiColumnIndex < 0 || adjustColumnIndex < 0) continue;
+                                
+                                for (let i = 1; i < rows.length; i++) {
+                                    const cells = rows[i].querySelectorAll('td, th');
+                                    if (cells.length <= Math.max(liangtiColumnIndex, adjustColumnIndex)) continue;
+                                    
+                                    const cellText = getText(cells[liangtiColumnIndex]);
+                                    const normalizedCellText = normalizeText(cellText);
+                                    if (normalizedCellText) visiblePartNames.push(normalizedCellText);
+                                    if (textMatches(cellText)) {
+                                        targetRow = rows[i];
+                                        targetCellIndex = adjustColumnIndex;
+                                        targetCell = cells[adjustColumnIndex];
+                                        console.log('✓ 在普通 table 中找到目标行');
+                                        break;
+                                    }
+                                }
+                                if (targetRow) break;
+                            }
+                        }
+                        
+                        // 最后再按单元格文本找行，但仍尽量使用该行最后一个 input-number，避免误填标准尺寸列
+                        if (!targetRow) {
+                            console.log('方法3: 直接查找包含量体部位名称的单元格...');
+                            const cells = searchScope.querySelectorAll('td, th');
+                            for (let cell of cells) {
+                                const cellText = getText(cell);
+                                const normalizedCellText = normalizeText(cellText);
+                                if (normalizedCellText) visiblePartNames.push(normalizedCellText);
+                                if (textMatches(cellText)) {
+                                    targetRow = cell.parentElement;
+                                    console.log('✓ 通过单元格找到目标行');
+                                    break;
+                                }
+                            }
+                        }
+
+                        // 页面如“录入量体数据V2”左右分表时，最稳的是直接按行文本命中量体部位
+                        if (!targetRow) {
+                            console.log('方法4: 按整行文本查找量体部位...');
+                            const rows = searchScope.querySelectorAll('tbody tr, tr');
+                            for (let row of rows) {
+                                const rowText = getText(row);
+                                if (!rowText) continue;
+                                const normalizedRowText = normalizeText(rowText);
+                                if (normalizedRowText) visiblePartNames.push(normalizedRowText);
+                                if (textMatches(rowText)) {
+                                    targetRow = row;
+                                    const cells = row.querySelectorAll('td, th');
+                                    targetCell = Array.from(cells).find(cell => cell.querySelector('.el-input-number__increase, .el-input-number__decrease, input')) || null;
+                                    console.log('✓ 通过整行文本找到目标行:', normalizedRowText);
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if (!targetRow) {
+                            console.log('❌ 未找到目标行');
+                            return {
+                                success: false,
+                                error: '未找到目标行',
+                                candidates: normalizedCandidates,
+                                visiblePartNames: Array.from(new Set(visiblePartNames)).slice(0, 80)
+                            };
+                        }
+                        
+                        // 3. 在“调整尺寸”列找按钮
+                        let btnSelector = isPlus ? '.el-input-number__increase' : '.el-input-number__decrease';
+                        let btn = null;
+                        let inputBox = null;
+                        const expectedValue = String(isPlus ? num : -num);
+                        const setInputValue = (input, value) => {
+                            input.scrollIntoView({ block: 'center' });
+                            input.focus();
+                            input.click();
+                            const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+                            setter.call(input, value);
+                            input.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertText', data: value }));
+                            input.dispatchEvent(new Event('change', { bubbles: true }));
+                            input.dispatchEvent(new Event('blur', { bubbles: true }));
+                        };
+                        const getTargetInput = () => {
+                            if (targetCell) {
+                                const input = targetCell.querySelector('input');
+                                if (input) return input;
+                            }
+                            const inputs = Array.from(targetRow.querySelectorAll('input'));
+                            return inputs.length ? inputs[inputs.length - 1] : null;
+                        };
+                        
+                        if (targetCell) {
+                            btn = targetCell.querySelector(btnSelector);
+                            if (btn) console.log('✓ 方式1: 在调整尺寸列找到按钮');
+                        }
+                        
+                        if (!btn) {
+                            const cells = targetRow.querySelectorAll('td, th');
+                            if (targetCellIndex >= 0 && cells.length > targetCellIndex) {
+                                btn = cells[targetCellIndex].querySelector(btnSelector);
+                                if (btn) console.log('✓ 方式2: 通过列索引找到按钮');
+                            }
+                        }
+                        
+                        if (!btn) {
+                            const inputNumbers = targetRow.querySelectorAll('.el-input-number');
+                            if (inputNumbers.length > 0) {
+                                const inputNumber = inputNumbers[inputNumbers.length - 1];
+                                btn = inputNumber.querySelector(btnSelector);
+                                if (btn) console.log('✓ 方式3: 回退到该行最后一个input-number按钮');
+                            }
+                        }
+                        
+                        if (!btn) {
+                            btn = targetRow.querySelector(btnSelector);
+                            if (btn) console.log('✓ 方式4: 在目标行内找到按钮');
+                        }
+                        
+                        if (btn) {
+                            console.log('✓ 找到', isPlus ? '+ 号按钮' : '- 号按钮');
+                            
+                            // 点击 N 次
+                            for (let i = 0; i < num; i++) {
+                                btn.click();
+                                console.log('第', i+1, '次点击');
+                            }
+                            
+                            inputBox = getTargetInput();
+                            const currentValue = inputBox ? String(inputBox.value || '').trim() : '';
+                            console.log('点击后的输入框值:', currentValue, '期望:', expectedValue);
+                            if (!inputBox) {
+                                return {
+                                    success: false,
+                                    error: '点击按钮后未找到输入框，无法验证是否生效',
+                                    candidates: normalizedCandidates,
+                                    visiblePartNames: Array.from(new Set(visiblePartNames)).slice(0, 80)
+                                };
+                            }
+                            if (currentValue !== expectedValue) {
+                                console.log('点击未生效，改用原生 setter 直接写入...');
+                                setInputValue(inputBox, expectedValue);
+                            }
+                            const finalValue = String(inputBox.value || '').trim();
+                            console.log('最终输入框值:', finalValue);
+                            return {
+                                success: finalValue === expectedValue,
+                                value: finalValue,
+                                error: finalValue === expectedValue ? '' : '已找到输入框但前端值未生效'
+                            };
+                        } else {
+                            console.log('❌ 未找到按钮');
+                            
+                            // 尝试直接设置输入框值作为备选方案
+                            inputBox = getTargetInput();
+                            if (inputBox) {
+                                console.log('尝试直接设置输入框值...');
+                                setInputValue(inputBox, expectedValue);
+                                const finalValue = String(inputBox.value || '').trim();
+                                console.log('✓ 已直接设置输入框值:', finalValue);
+                                return {
+                                    success: finalValue === expectedValue,
+                                    value: finalValue,
+                                    error: finalValue === expectedValue ? '' : '已找到输入框但前端值未生效'
+                                };
+                            }
+                            
+                            return {
+                                success: false,
+                                error: '找到目标行但未找到调整尺寸输入控件',
+                                candidates: normalizedCandidates,
+                                visiblePartNames: Array.from(new Set(visiblePartNames)).slice(0, 80)
+                            };
+                        }
+                    """, field_name, is_plus, num, field_candidates)
+                    field_found = bool(fill_result and fill_result.get('success')) if isinstance(fill_result, dict) else bool(fill_result)
+                    
+                    if field_found:
+                        print(f'      ✓ 已填写 {field_name} = {field_value}')
+                    else:
+                        print(f'      ! 未找到量体字段：{field_name}')
+                        if isinstance(fill_result, dict):
+                            print(f'        匹配候选：{fill_result.get("candidates", [])}')
+                            visible_names = fill_result.get('visiblePartNames', [])
+                            if visible_names:
+                                print(f'        当前可见量体部位：{visible_names[:40]}')
+                            if fill_result.get('error'):
+                                print(f'        原因：{fill_result.get("error")}')
+                        
+                except Exception as e:
+                    print(f'      ! 填写量体数据时出错：{e}')
+        
+        sleep(1000)
         
         print('  【第1步】保存量体信息窗口...')
         # 获取保存前对话框数量
@@ -1711,22 +2166,30 @@ class TestFullProcess:
                 chima_size = item['chima_size']
                 luocha = item['luocha']
                 custom_options = item.get('custom_options', {})
+                fabric_width = item.get('fabric_width')
+                fabric_no = item.get('fabric_no')
+                fabric_style = item.get('fabric_style')
+                liangti_data = item.get('liangti_data', {})
                 
                 print(f'\n{"="*50}')
                 print(f'【第 {idx}/{len(banxing_list)} 个版型】{banxing}')
                 print(f'{"="*50}')
+                print(f'  尺码：{chima_size}')
+                print(f'  面料编号：{fabric_no}')
+                print(f'  面料风格：{fabric_style}')
+                print(f'  门幅：{fabric_width}')
                 
                 # 计算style_type用于enter_liangti_info
                 style_type = self.get_style_type(banxing)
                 
-                # 添加明细
-                self.add_detail(banxing, chima_size)
+                # 添加明细（传入版型独立配置）
+                self.add_detail(banxing, chima_size, fabric_width, fabric_no, fabric_style)
                 
                 # 修改定制选项（在量体信息之前）
                 self.edit_custom_options(custom_options)
                 
                 # 填写量体信息（根据版型类型使用不同的尺码和落差）
-                self.enter_liangti_info(chima_size, style_type, luocha)
+                self.enter_liangti_info(chima_size, style_type, luocha, liangti_data)
                 
                 # 保存明细
                 save_success = self.save_detail()
@@ -1974,40 +2437,59 @@ class TestFullProcess:
         return fabric_consumption
 
     def test_fabric_consumption(self, production_no):
-        """测试获取面料耗量（需等待10分钟）"""
+        """测试获取面料耗量（每5分钟查询一次，最多查询5次）"""
         print('=== 获取面料耗量测试 ===\n')
         
         try:
-            # 等待10分钟，让系统计算面料耗量
-            wait_minutes = 10
-            print(f'【等待 {wait_minutes} 分钟】系统需要时间计算面料耗量...')
-            total_seconds = wait_minutes * 60
-            for i in range(wait_minutes):
-                print(f'  已等待 {i+1}/{wait_minutes} 分钟...')
-                sleep(60000)  # 等待1分钟
+            # 配置参数
+            query_interval_minutes = 5  # 每次查询间隔5分钟
+            max_query_count = 5  # 最多查询5次
             
-            # 返回生产下单管理页面
-            self.go_back_to_production_order_list()
-            sleep(2000)
+            fabric_consumption = None
+            query_success = False
             
-            self.search_order_by_production_no(production_no)
-            sleep(2000)
-            
-            if self.find_order_and_click_detail(production_no):
-                fabric_consumption = self.get_fabric_consumption()
+            for query_count in range(max_query_count):
+                print(f'【第 {query_count + 1}/{max_query_count} 次查询】')
                 
-                if fabric_consumption:
-                    print(f'\n========== 面料耗量获取成功 ==========')
-                    print(f'生产单号：{production_no}')
-                    print(f'面料耗量：{fabric_consumption}')
-                    print(f'======================================\n')
+                # 等待指定时间（第一次查询前也需要等待）
+                if query_count > 0:
+                    print(f'  等待 {query_interval_minutes} 分钟...')
+                    for i in range(query_interval_minutes):
+                        print(f'    已等待 {i+1}/{query_interval_minutes} 分钟...')
+                        sleep(60000)  # 等待1分钟
+                
+                # 返回生产下单管理页面
+                self.go_back_to_production_order_list()
+                sleep(2000)
+                
+                # 搜索订单
+                self.search_order_by_production_no(production_no)
+                sleep(2000)
+                
+                # 查找订单并查看详情
+                if self.find_order_and_click_detail(production_no):
+                    fabric_consumption = self.get_fabric_consumption()
                     
-                    # 将面料耗量发送给OpenClaw（这里可以添加实际的发送逻辑）
-                    print(f'✓ 面料耗量已准备好发送给OpenClaw: {fabric_consumption}')
+                    if fabric_consumption:
+                        print(f'\n========== 面料耗量获取成功 ==========')
+                        print(f'生产单号：{production_no}')
+                        print(f'面料耗量：{fabric_consumption}')
+                        print(f'查询次数：{query_count + 1}')
+                        print(f'总等待时间：{(query_count + 1) * query_interval_minutes} 分钟')
+                        print(f'======================================\n')
+                        
+                        # 将面料耗量发送给OpenClaw（这里可以添加实际的发送逻辑）
+                        print(f'✓ 面料耗量已准备好发送给OpenClaw: {fabric_consumption}')
+                        query_success = True
+                        break
+                    else:
+                        print(f'  ⚠ 第 {query_count + 1} 次查询：未获取到面料耗量，继续等待...\n')
                 else:
-                    print('✗ 未能获取面料耗量')
-            else:
-                print('✗ 未找到订单')
+                    print(f'  ⚠ 第 {query_count + 1} 次查询：未找到订单\n')
+            
+            if not query_success:
+                print(f'✗ 已尝试 {max_query_count} 次查询（共等待 {max_query_count * query_interval_minutes} 分钟），仍未获取到面料耗量')
+                print('  已停止查询')
         
         except Exception as e:
             print(f'  ⚠ 测试失败: {e}')
