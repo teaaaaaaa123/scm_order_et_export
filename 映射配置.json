@@ -1,0 +1,1064 @@
+{
+  "注释": "Complete mapping from Excel tables",
+  "量体部位映射": {
+    "yxk": {
+      "名称": "右袖口",
+      "英文": "Right cuff"
+    },
+    "zxk": {
+      "名称": "左袖口",
+      "英文": "Left cuff"
+    },
+    "csxc": {
+      "名称": "长袖长（衬衫尺寸）",
+      "英文": "Shirt Sleeve Length "
+    },
+    "yww": {
+      "名称": "右腕围",
+      "英文": "Right wrist circumference"
+    },
+    "sczws": {
+      "名称": "左腕围",
+      "英文": "Left wrist circumference"
+    },
+    "cssbw": {
+      "名称": "下臂围",
+      "英文": "Lower arm circumference"
+    },
+    "sby": {
+      "名称": "上臂围",
+      "英文": "Upper arm circumference"
+    },
+    "yxc": {
+      "名称": "右袖长",
+      "英文": "Right Sleeve Length"
+    },
+    "zxc": {
+      "名称": "左袖长",
+      "英文": "Left Sleeve Length"
+    },
+    "lw": {
+      "名称": "领围",
+      "英文": "neck size"
+    },
+    "dxc": {
+      "名称": "短袖长",
+      "英文": "Short sleeved length"
+    },
+    "fullBust": {
+      "名称": "全胸围",
+      "英文": "Full Chest"
+    },
+    "sjyw": {
+      "名称": "拉开松紧腰围",
+      "英文": ""
+    },
+    "fullHipWidth": {
+      "名称": "全臀围",
+      "英文": "Full Hip"
+    },
+    "fullWaistWidth": {
+      "名称": "全腰围",
+      "英文": "Full Waist"
+    },
+    "lowerHem": {
+      "名称": "下摆",
+      "英文": "Hem"
+    },
+    "smallShoulderWidth": {
+      "名称": "小肩宽",
+      "英文": "Shoulder Length"
+    },
+    "shoulderWidth": {
+      "名称": "肩宽",
+      "英文": "Shoulder to Shoulder"
+    },
+    "outerSleeveLength": {
+      "名称": "外袖长",
+      "英文": "Outside Length"
+    },
+    "innerSleeveLengh": {
+      "名称": "内袖长",
+      "英文": "Inside Length"
+    },
+    "sleeveLength": {
+      "名称": "袖长",
+      "英文": "Sleeve Length"
+    },
+    "shortRegularTall": {
+      "名称": "后中长",
+      "英文": "CB Length"
+    },
+    "frontLength": {
+      "名称": "前衣长",
+      "英文": "Front Length"
+    },
+    "cuffButtonsWidth": {
+      "名称": "袖克夫袖口",
+      "英文": "Cuff Buttons Width"
+    },
+    "halfSleevedFat": {
+      "名称": "半袖肥",
+      "英文": "Half Sleeved Fat"
+    },
+    "sleeveWidth": {
+      "名称": "袖肥",
+      "英文": "Bicep"
+    },
+    "wrisband": {
+      "名称": "袖口",
+      "英文": "Sleeve Opening"
+    },
+    "raglanSleeve": {
+      "名称": "连肩袖",
+      "英文": "Raglan Sleeve\t"
+    },
+    "backWidth": {
+      "名称": "背宽",
+      "英文": "Full Back"
+    },
+    "circumFerenceOfSleeve": {
+      "名称": "袖窿周长",
+      "英文": "Armhole Round"
+    },
+    "posteriorChestWidth": {
+      "名称": "后胸宽",
+      "英文": "Back Chest"
+    },
+    "chestWidth": {
+      "名称": "前胸宽",
+      "英文": "Front Chest"
+    },
+    "upperleg": {
+      "名称": "横裆",
+      "英文": "Uperleg"
+    },
+    "thigh": {
+      "名称": "大腿",
+      "英文": "Thigh"
+    },
+    "calf": {
+      "名称": "小腿",
+      "英文": "Calf"
+    },
+    "wholewave": {
+      "名称": "全浪",
+      "英文": "Full Rise"
+    },
+    "forewave": {
+      "名称": "前浪",
+      "英文": "Front Rise"
+    },
+    "risingWaves": {
+      "名称": "后浪",
+      "英文": "Back Rise"
+    },
+    "xw": {
+      "名称": "膝围",
+      "英文": "Knee Circumference"
+    },
+    "bottoms": {
+      "名称": "脚围",
+      "英文": "Bottoms"
+    },
+    "foodwith": {
+      "名称": "脚口",
+      "英文": "Foot Width"
+    },
+    "innerPants": {
+      "名称": "内裤长",
+      "英文": "Inside Length."
+    },
+    "externalSkirt": {
+      "名称": "裙长",
+      "英文": "External Skirt"
+    },
+    "longPants": {
+      "名称": "净裤长",
+      "英文": "Outside Length."
+    },
+    "zipperLength": {
+      "名称": "拉链长",
+      "英文": "Zipper Length"
+    },
+    "zd": {
+      "名称": "中裆",
+      "英文": "Leg Width"
+    }
+  },
+  "版型属性映射": {
+    "艾伦眼颜色": {
+      "大衣": {
+        "顺色": "DY_curvedHandmadeColor_matchFabric",
+        "000": "DY_curvedHandmadeColor_000",
+        "46": "DY_curvedHandmadeColor_46",
+        "130": "DY_curvedHandmadeColor_130",
+        "131": "DY_curvedHandmadeColor_131",
+        "155": "DY_curvedHandmadeColor_155",
+        "174": "DY_curvedHandmadeColor_174",
+        "196": "DY_curvedHandmadeColor_196",
+        "214": "DY_curvedHandmadeColor_214",
+        "247": "DY_curvedHandmadeColor_247",
+        "339": "DY_curvedHandmadeColor_339",
+        "367": "DY_curvedHandmadeColor_367",
+        "387": "DY_curvedHandmadeColor_387",
+        "412": "DY_curvedHandmadeColor_412",
+        "440": "DY_curvedHandmadeColor_440",
+        "454": "DY_curvedHandmadeColor_454",
+        "540": "DY_curvedHandmadeColor_540",
+        "542": "DY_curvedHandmadeColor_542",
+        "665": "DY_curvedHandmadeColor_665",
+        "697": "DY_curvedHandmadeColor_697",
+        "701": "DY_curvedHandmadeColor_701",
+        "702": "DY_curvedHandmadeColor_702",
+        "769": "DY_curvedHandmadeColor_769",
+        "800": "DY_curvedHandmadeColor_800",
+        "802": "DY_curvedHandmadeColor_802",
+        "810": "DY_curvedHandmadeColor_810",
+        "812": "DY_curvedHandmadeColor_812",
+        "889": "DY_curvedHandmadeColor_889",
+        "909": "DY_curvedHandmadeColor_909",
+        "925": "DY_curvedHandmadeColor_925",
+        "964": "DY_curvedHandmadeColor_964"
+      },
+      "上衣": {
+        "顺色": "SY_curvedHandmadeColor_matchFabric",
+        "000": "SY_curvedHandmadeColor_000",
+        "46": "SY_curvedHandmadeColor_46",
+        "130": "SY_curvedHandmadeColor_130",
+        "131": "SY_curvedHandmadeColor_131",
+        "155": "SY_curvedHandmadeColor_155",
+        "174": "SY_curvedHandmadeColor_174",
+        "196": "SY_curvedHandmadeColor_196",
+        "214": "SY_curvedHandmadeColor_214",
+        "247": "SY_curvedHandmadeColor_247",
+        "339": "SY_curvedHandmadeColor_339",
+        "367": "SY_curvedHandmadeColor_367",
+        "387": "SY_curvedHandmadeColor_387",
+        "412": "SY_curvedHandmadeColor_412",
+        "440": "SY_curvedHandmadeColor_440",
+        "454": "SY_curvedHandmadeColor_454",
+        "540": "SY_curvedHandmadeColor_540",
+        "542": "SY_curvedHandmadeColor_542",
+        "665": "SY_curvedHandmadeColor_665",
+        "697": "SY_curvedHandmadeColor_697",
+        "701": "SY_curvedHandmadeColor_701",
+        "702": "SY_curvedHandmadeColor_702",
+        "769": "SY_curvedHandmadeColor_769",
+        "800": "SY_curvedHandmadeColor_800",
+        "802": "SY_curvedHandmadeColor_802",
+        "810": "SY_curvedHandmadeColor_810",
+        "812": "SY_curvedHandmadeColor_812",
+        "889": "SY_curvedHandmadeColor_889",
+        "909": "SY_curvedHandmadeColor_909",
+        "925": "SY_curvedHandmadeColor_925",
+        "964": "SY_curvedHandmadeColor_964"
+      }
+    },
+    "米兰眼颜色": {
+      "大衣": {
+        "顺色": "DY_jacketButtonholeColor_matchFabric",
+        "000": "DY_jacketButtonholeColor_000",
+        "46": "DY_jacketButtonholeColor_46",
+        "130": "DY_jacketButtonholeColor_130",
+        "131": "DY_jacketButtonholeColor_131",
+        "155": "DY_jacketButtonholeColor_155",
+        "174": "DY_jacketButtonholeColor_174",
+        "196": "DY_jacketButtonholeColor_196",
+        "214": "DY_jacketButtonholeColor_214",
+        "247": "DY_jacketButtonholeColor_247",
+        "339": "DY_jacketButtonholeColor_339",
+        "367": "DY_jacketButtonholeColor_367",
+        "387": "DY_jacketButtonholeColor_387",
+        "412": "DY_jacketButtonholeColor_412",
+        "440": "DY_jacketButtonholeColor_440",
+        "454": "DY_jacketButtonholeColor_454",
+        "540": "DY_jacketButtonholeColor_540",
+        "542": "DY_jacketButtonholeColor_542",
+        "665": "DY_jacketButtonholeColor_665",
+        "697": "DY_jacketButtonholeColor_697",
+        "701": "DY_jacketButtonholeColor_701",
+        "702": "DY_jacketButtonholeColor_702",
+        "769": "DY_jacketButtonholeColor_769",
+        "800": "DY_jacketButtonholeColor_800",
+        "802": "DY_jacketButtonholeColor_802",
+        "810": "DY_jacketButtonholeColor_810",
+        "812": "DY_jacketButtonholeColor_812",
+        "889": "DY_jacketButtonholeColor_889",
+        "909": "DY_jacketButtonholeColor_909",
+        "925": "DY_jacketButtonholeColor_925",
+        "964": "DY_jacketButtonholeColor_964"
+      },
+      "上衣": {
+        "顺色": "SY_jacketButtonholeColor_matchFabric",
+        "000": "SY_jacketButtonholeColor_000",
+        "46": "SY_jacketButtonholeColor_46",
+        "130": "SY_jacketButtonholeColor_130",
+        "131": "SY_jacketButtonholeColor_131",
+        "155": "SY_jacketButtonholeColor_155",
+        "174": "SY_jacketButtonholeColor_174",
+        "196": "SY_jacketButtonholeColor_196",
+        "214": "SY_jacketButtonholeColor_214",
+        "247": "SY_jacketButtonholeColor_247",
+        "310": "SY_jacketButtonholeColor_310",
+        "339": "SY_jacketButtonholeColor_339",
+        "367": "SY_jacketButtonholeColor_367",
+        "387": "SY_jacketButtonholeColor_387",
+        "412": "SY_jacketButtonholeColor_412",
+        "440": "SY_jacketButtonholeColor_440",
+        "454": "SY_jacketButtonholeColor_454",
+        "540": "SY_jacketButtonholeColor_540",
+        "542": "SY_jacketButtonholeColor_542",
+        "665": "SY_jacketButtonholeColor_665",
+        "697": "SY_jacketButtonholeColor_697",
+        "701": "SY_jacketButtonholeColor_701",
+        "702": "SY_jacketButtonholeColor_702",
+        "707": "SY_jacketButtonholeColor_707",
+        "769": "SY_jacketButtonholeColor_769",
+        "800": "SY_jacketButtonholeColor_800",
+        "802": "SY_jacketButtonholeColor_802",
+        "810": "SY_jacketButtonholeColor_810",
+        "812": "SY_jacketButtonholeColor_812",
+        "889": "SY_jacketButtonholeColor_889",
+        "909": "SY_jacketButtonholeColor_909",
+        "925": "SY_jacketButtonholeColor_925",
+        "964": "SY_jacketButtonholeColor_964"
+      }
+    },
+    "手巾袋": {
+      "猎装": {
+        "弧手巾袋": "LZ_sjd_hsjd",
+        "SA立体": "LZ_sjd_SAlt",
+        "SA": "LZ_sjd_SA",
+        "SB": "LZ_sjd_SB",
+        "SC立体": "LZ_sjd_sclt",
+        "SC": "LZ_sjd_SC",
+        "SD": "LZ_sjd_SD",
+        "SE": "LZ_sjd_SE",
+        "SF": "LZ_sjd_SF",
+        "SH": "LZ_sjd_SH",
+        "SI立体": "LZ_sjd_silt",
+        "SI": "LZ_sjd_SI",
+        "SJ": "LZ_sjd_SJ",
+        "SK": "LZ_sjd_SK",
+        "SL": "LZ_sjd_SL",
+        "SM立体": "LZ_sjd_smltmdjdg",
+        "SM": "LZ_sjd_SM",
+        "ST": "LZ_sjd_st",
+        "SS": "LZ_sjd_ss",
+        "SN": "LZ_sjd_sn",
+        "MG口袋": "LZ_sjd_mgkd",
+        "1SF024专用口袋": "LZ_sjd_1SF024zy",
+        "Y款 圆角打褶明袋": "LZ_sjd_yk",
+        "1SF028专用口袋": "LZ_sjd_1SF028",
+        "1SF014专用口袋": "LZ_sjd_1sf014zykd",
+        "1JAS03专用口袋": "LZ_sjd_jaszykd"
+      },
+      "大衣": {
+        "无": "DY_sjd_wu",
+        "直手巾袋": "DY_sjd_zsjd",
+        "弧手巾袋": "DY_sjd_hsjd",
+        "弧形小明袋": "DY_sjd_hxxmd",
+        "两个打褶圆角明袋加袋盖": "DY_sjd_dzyjmdjdg",
+        "上两直手巾袋": "DY_sjd_slzsjd",
+        "小酒杯明袋": "DY_sjd_xjbmd",
+        "小明袋": "DY_sjd_xmd",
+        "两个打褶直角明袋加袋盖": "DY_sjd_dzjjmdjdg",
+        "双支线加袋盖": "DY_sjd_szxjdg",
+        "一个圆角打褶明袋加斜袋盖": "DY_sjd_yjdzmdjxdg",
+        "船型手巾袋": "DY_sjd_CXSJD",
+        "斜插双支线袋": "DY_sjd_xcszxd"
+      },
+      "上衣": {
+        "无": "SY_jacketTowelBag_wu",
+        "A款 弧手巾袋": "SY_jacketTowelBag_hxsjd",
+        "B款 直手巾袋": "SY_jacketTowelBag_zxsjd",
+        "C款 小明袋": "SY_jacketTowelBag_xmd",
+        "D款 弧形小明袋": "SY_jacketTowelBag_md",
+        "E款 小酒杯明袋": "SY_jacketTowelBag_xjbmd",
+        "F款 两个打褶圆角明袋加袋盖": "SY_jacketTowelBag_dzyjmdjdg",
+        "G款 两个打褶直角明袋加袋盖": "SY_jacketTowelBag_dzmdjdg",
+        "H款 两个圆角打褶明袋加斜袋盖": "SY_jacketTowelBag_lgyjdzmdjxdg",
+        "I款 圆角拼接两明袋": "SY_jacketTowelBag_yjpjmd",
+        "J款 小水滴明袋": "SY_jacketTowelBag_xsdmd",
+        "L款 双支线袋": "SY_jacketTowelBag_lkszxd",
+        "K款 弧形小明袋加袋盖": "SY_jacketTowelBag_kkhxxmdjdg",
+        "M款": "SY_jacketTowelBag_mk",
+        "AK小明袋": "SY_jacketTowelBag_akxmd",
+        "AK弧手巾袋": "SY_jacketTowelBag_aksjd",
+        "猎装手巾袋": "SY_jacketTowelBag_lzsjd",
+        "可抽拉手巾袋": "SY_jacketTowelBag_kclsjd",
+        "圆角打褶明袋": "SY_jacketTowelBag_yjdzmdbag",
+        "MG口袋": "SY_jacketTowelBag_mgkd",
+        "AK专用打褶明袋": "SY_jacketTowelBag_dzmd",
+        "1KN333专用明袋": "SY_jacketTowelBag_zymd",
+        "一个圆角打褶明袋加斜袋盖": "SY_jacketTowelBag_yjdzmd",
+        "明袋加袋盖": "SY_jacketTowelBag_mdjdg",
+        "AK 打褶明袋加斜袋盖": "SY_jacketTowelBag_akdzmdjxdg",
+        "SM": "SY_jacketTowelBag_smkd",
+        "SK": "SY_jacketTowelBag_sk"
+      },
+      "马甲": {
+        "无": "MJ_sjd_wu",
+        "直手巾袋": "MJ_sjd_zsjd",
+        "弧手巾袋": "MJ_sjd_hsjd",
+        "弧形小明袋": "MJ_sjd_hxxmd",
+        "上两直手巾袋": "MJ_sjd_slzsjd",
+        "专用明袋": "MJ_sjd_zymd"
+      }
+    },
+    "左垫肩": {
+      "猎装": {
+        "无垫肩": "LZ_zdj_wdj",
+        "0.2cm": "LZ_zdj_0.2",
+        "0.5cm": "LZ_zdj_0.5",
+        "0.7cm": "LZ_zdj_0.7",
+        "1cm": "LZ_zdj_1",
+        "1.5cm": "LZ_zdj_1.5"
+      },
+      "上衣": {
+        "无垫肩": "SY_jacketShoulderPads_wdk",
+        "0.2cm": "SY_jacketShoulderPads_0.2",
+        "0.5cm": "SY_jacketShoulderPads_0.5",
+        "0.7cm": "SY_jacketShoulderPads_0.7",
+        "1cm": "SY_jacketShoulderPads_1",
+        "1.5cm": "SY_jacketShoulderPads_1.5",
+        "2cm硬的": "SY_jacketShoulderPads_2yd",
+        "2cm": "SY_jacketShoulderPads_2"
+      }
+    },
+    "右垫肩": {
+      "猎装": {
+        "无垫肩": "LZ_ydj_wdj",
+        "0.2cm": "LZ_ydj_0.2",
+        "0.5cm": "LZ_ydj_0.5",
+        "0.7cm": "LZ_ydj_0.7",
+        "1cm": "LZ_ydj_1",
+        "1.5cm": "LZ_ydj_1.5"
+      },
+      "上衣": {
+        "无垫肩": "SY_ydj_wdj",
+        "0.2cm": "SY_ydj_0.2",
+        "0.5cm": "SY_ydj_0.5",
+        "0.7cm": "SY_ydj_0.7cm",
+        "1cm": "SY_ydj_1cm",
+        "1.5cm": "SY_ydj_1.5cm",
+        "2cm": "SY_ydj_2",
+        "2cm硬的": "SY_ydj_2y"
+      }
+    },
+    "上衣面大袋": {
+      "上衣": {
+        "无": "SY_jacketPockets_wu",
+        "A款 两直袋盖": "SY_jacketPockets_gd",
+        "B款 两明袋": "SY_jacketPockets_md",
+        "C款 双支线": "SY_jacketPockets_szx",
+        "D款 两弧形明袋": "SY_jacketPockets_lhxmd",
+        "E款 两明袋加袋盖": "SY_jacketPockets_mdjgd",
+        "F款 下三明袋": "SY_jacketPockets_xsmd",
+        "G款 下三双支线": "SY_jacketPockets_xszx",
+        "H款 两弧形双支线袋": "SY_jacketPockets_hklhxszxd",
+        "I款 酒杯明袋": "SY_jacketPockets_jbmd",
+        "J款 水滴明袋": "SY_jacketPockets_sdmd",
+        "K款 三直袋盖": "SY_jacketPockets_sxdg",
+        "L款 两斜袋盖": "SY_jacketPockets_lxdg",
+        "M款 两斜双支线袋": "SY_jacketPockets_lxszxd",
+        "N款 三斜袋盖": "SY_jacketPockets_tripleInclinedBagCover",
+        "O款 三弧形明袋": "SY_jacketPockets_xshxmd",
+        "P款 两袋盖加小双支线": "SY_jacketPockets_xldgjszx",
+        "Q款 圆角打褶明袋加直袋盖": "SY_jacketPockets_yjdzmdjzdg",
+        "R款 打褶直角明袋加袋盖": "SY_jacketPockets_dzzjmdjgd",
+        "S款 梯型袋盖加打褶明袋": "SY_jacketPockets_txdgjdzmd",
+        "T款 圆角风琴袋加袋盖": "SY_jacketPockets_yjfqzjgd",
+        "U款 立体明袋加袋盖": "SY_jacketPockets_ltmdjgd",
+        "V款 圆角打褶明袋加斜袋盖": "SY_jacketPockets_yjdzmdjxdg",
+        "W款 单支线": "SY_jacketPockets_dzx",
+        "X款 下三水滴明袋": "SY_jacketPockets_xssdmd",
+        "Y款 圆角打褶明袋": "SY_jacketPockets_yjdzmd",
+        "Z款 直角打褶明袋": "SY_jacketPockets_zjdzmd",
+        "AA款 立体直角明袋加直角袋盖": "SY_jacketPockets_ltzjmdjzjdg",
+        "AB款 切角拼接明袋": "SY_jacketPockets_abkqjpjmd",
+        "AC款 切角拼接三明袋": "SY_jacketPockets_ackqjpjsmd",
+        "AD款": "SY_jacketPockets_aekkd",
+        "AE款 风琴袋": "SY_jacketPockets_fqd",
+        "AF款 三斜双支线袋": "SY_jacketPockets_SlidePocketJetted",
+        "AG款 上口压线两明袋": "SY_jacketPockets_agskyxlmd",
+        "AH款 斜插袋": "SY_jacketPockets_xcd",
+        "AI款": "SY_jacketPockets_ahkkd",
+        "AJ款 单支线袋盖": "SY_jacketPockets_singleBranchBagCover",
+        "AK下三明袋": "SY_jacketPockets_akxsmd",
+        "AK专用打褶明袋": "SY_jacketPockets_dzmd",
+        "AK款 明袋": "SY_jacketPockets_akmd",
+        "AL款 两斜袋盖加斜双支线": "SY_jacketPockets_xlxdgjxszx",
+        "AM款 弧形明袋加袋盖": "SY_jacketPockets_amkhxlmdjdg",
+        "AN款": "SY_jacketPockets_ank",
+        "AO款 两袋盖加小单支线袋": "SY_jacketPockets_aokldgjxdzxq",
+        "AP款 斜单支线袋": "SY_jacketPockets_apkxszxd",
+        "月牙双支线": "SY_jacketPockets_yyszx",
+        "MM款": "SY_jacketPockets_MM",
+        "1SF012专用口袋": "SY_jacketPockets_zykd",
+        "专用袋": "SY_jacketPockets_zyd",
+        "MK": "SY_jacketPockets_mk",
+        "省道隐形拉链插袋": "SY_jacketPockets_sdyxlld",
+        "前侧缝插袋": "SY_jacketPockets_qcfxd"
+      },
+      "猎装": {
+        "MA立体": "LZ_symdd_MAlt",
+        "MA": "LZ_symdd_MA",
+        "MB": "LZ_symdd_MB",
+        "MC立体": "LZ_symdd_mclt",
+        "MC": "LZ_symdd_MC",
+        "MD": "LZ_symdd_MD",
+        "ME": "LZ_symdd_ME",
+        "MG三明袋": "LZ_symdd_MG",
+        "MH": "LZ_symdd_MH",
+        "MI立体": "LZ_symdd_milt",
+        "MI": "LZ_symdd_MI",
+        "MJ": "LZ_symdd_MJ",
+        "MK": "LZ_symdd_MK",
+        "ML": "LZ_symdd_ML",
+        "MM立体": "LZ_symdd_mmltmd",
+        "MM": "LZ_symdd_MM",
+        "MN": "LZ_symdd_MN",
+        "MO": "LZ_symdd_MO",
+        "MP": "LZ_symdd_mpkd",
+        "MQ": "LZ_symdd_mq",
+        "MR": "LZ_symdd_mr",
+        "MS": "LZ_symdd_mskd",
+        "MT": "LZ_symdd_mtkd",
+        "A款 两直袋盖": "LZ_symdd_lzdg",
+        "B款 两明袋": "LZ_symdd_bklmd",
+        "C款 双支线": "LZ_symdd_szx",
+        "Y款 圆角打褶明袋": "LZ_symdd_yk",
+        "1SF044": "LZ_symdd_zykd1sf044",
+        "1SF035专用口袋": "LZ_symdd_zykd035",
+        "1SF006专用口袋": "LZ_symdd_sf006",
+        "1SF012专用口袋": "LZ_symdd_1sf012zykd",
+        "1SF019专用口袋": "LZ_symdd_1sf019md",
+        "1SF014专用口袋": "LZ_symdd_1sf014zykd",
+        "1SF024专用口袋": "LZ_symdd_1SF024",
+        "1SF021专用口袋": "LZ_symdd_zymd",
+        "1JAS03专用口袋": "LZ_symdd_jaszyd",
+        "同工艺书": "LZ_symdd_tgys"
+      }
+    },
+    "大衣面袋": {
+      "大衣": {
+        "无": "DY_coatPockets_wu",
+        "4KN1075斜双支线袋": "DY_coatPockets_xszxd",
+        "A款 直斜插袋": "DY_coatPockets_zxcd",
+        "B款 明袋": "DY_coatPockets_bkmd",
+        "C款 两袋盖": "DY_coatPockets_dg",
+        "D款 明袋加袋盖": "DY_coatPockets_mdjdg",
+        "E款 明袋加西装袋盖": "DY_coatPockets_ekmdjxzdg",
+        "F款 单开线加袋盖": "DY_coatPockets_fkdkxjdg",
+        "G款 弧型斜插袋": "DY_coatPockets_gkhxxcd",
+        "H款 袋盖斜插袋": "DY_coatPockets_dgxcd",
+        "I款 袋盖斜插袋": "DY_coatPockets_ikdgjxd",
+        "专用口袋": "DY_coatPockets_zymd",
+        "J款 斜袋袋盖小料": "DY_coatPockets_jkxddg",
+        "K款 斜插明袋": "DY_coatPockets_kkxcmd",
+        "L款 三袋盖": "DY_coatPockets_lksdg",
+        "M款 明袋加斜袋盖": "DY_coatPockets_mdjxdg",
+        "双支线": "DY_coatPockets_szx",
+        "N款 可侧插明袋加袋盖": "DY_coatPockets_Nk",
+        "O款 加大版 明袋加袋盖": "DY_coatPockets_jdbmdjdg",
+        "P款 明袋袋盖 加斜插袋": "DY_coatPockets_pkkd",
+        "Q款：立体明袋袋盖 加斜插袋": "DY_coatPockets_ltmdjxcd",
+        "拼接明袋": "DY_coatPockets_pjmd"
+      }
+    },
+    "大衣袖扣": {
+      "大衣": {
+        "一扣": "DY_coatSleeveButton_oneBuckle",
+        "叠扣": "DY_coatSleeveButton_dk",
+        "袖袢": "DY_coatSleeveButton_xb",
+        "翻折6CM": "DY_coattSleeveButton_bz6cm",
+        "平扣": "DY_coatSleeveButton_flatBuckle",
+        "斜扣\t": "DY_coatSleeveButton_diagonalBuckle",
+        "斜眼叠扣": "DY_coatSleeveButton_slantBuckle",
+        "斜眼平扣": "DY_coatSleeveButton_flatFoldingBuckle",
+        "翻折 7.5cm": "DY_coatSleeveButton_fz7.5",
+        "翻折9.5cm": "DY_coatSleeveButton_xkfb9.5",
+        "无": "DY_coatSleeveButton_wu",
+        "翻折10.8cm": "DY_coatSleeveButton_fz10.8",
+        "专用袖扣": "DY_coatSleeveButton_zyxk",
+        "A款袖袢": "DY_coatSleeveButton_akuanxiukou"
+      }
+    },
+    "半里": {
+      "上衣": {
+        "锁边翘边": "SY_halfAMile_lockingAndWarping",
+        "半里包边": "SY_halfAMile_halfMileEdging"
+      },
+      "猎装": {
+        "半里包边": "LZ_bl_blbb",
+        "锁边翘边": "LZ_bl_sbqb"
+      },
+      "大衣": {
+        "锁边翘边": "DY_halfAMile_lockingAndWarping\t",
+        "半里包边\t": "DY_halfAMile_halfMileEdging"
+      }
+    },
+    "猎装": {
+      "上衣": {
+        "腰带款": "SY_safariSuit_beltStyle",
+        "抽绳款": "SY_safariSuit_pullOutPayment"
+      },
+      "猎装": {
+        "抽绳款": "LZ_lz_csk",
+        "腰带款": "LZ_lz_ydk"
+      },
+      "大衣": {
+        "腰带款": "DY_safariSuit_beltStyle",
+        "抽绳款": "DY_safariSuit_pullOutPayment"
+      }
+    },
+    "裤子前口袋": {
+      "西裤": {
+        "直插袋": "XK_trouserFrontPockets_straightPocket",
+        "斜插袋": "XK_trouserFrontPockets_xcd",
+        "牛仔袋": "XK_trouserFrontPockets_nzd",
+        "弧形斜插袋": "XK_trouserFrontPockets_hxxcd",
+        "双支线袋": "XK_trouserFrontPockets_szxd",
+        "单支线": "XK_trouserFrontPockets_dzx",
+        "斜插拉链袋": "XK_trouserFrontPockets_xclld",
+        "直插拉链袋": "XK_trouserFrontPockets_zclld",
+        "侧缝隐形拉链袋": "XK_trouserFrontPockets_cfyxldd"
+      }
+    },
+    "马甲后背": {
+      "马甲": {
+        "里布": "MJ_waistBack_lb",
+        "本料": "MJ_waistBack_bl"
+      }
+    },
+    "胸衬": {
+      "上衣": {
+        "无胸衬": "SY_jacketChestLining_wxc",
+        "一层胸衬": "SY_jacketChestLining_ycxc",
+        "二层胸衬": "SY_jacketChestLining_ecxc",
+        "三层胸衬": "SY_jacketChestLining_threeLayerChestLining",
+        "四层胸衬": "SY_jacketChestLining_scxc",
+        "五层胸衬": "SY_jacketChestLining_fiveLayerChestLining"
+      },
+      "猎装": {
+        "无胸衬": "LZ_xc_wxc",
+        "二层胸衬": "LZ_xc_ecxc",
+        "三层胸衬": "LZ_xc_scxc",
+        "四层胸衬": "LZ_xc_scxc4",
+        "五层胸衬": "LZ_xc_wcxc"
+      }
+    },
+    "工艺": {
+      "上衣": {
+        "全麻衬": "SY_craft_qmc",
+        "半麻衬": "SY_craft_bmc",
+        "无结构": "SY_craft_wjg"
+      },
+      "大衣": {
+        "半麻衬": "DY_craft_bmc",
+        "全麻衬": "DY_craft_fullCanvas",
+        "粘合衬": "DY_craft_adhesionCanvas"
+      },
+      "猎装": {
+        "半麻衬": "LZ_gy_bmc",
+        "全麻衬": "LZ_gy_qmc",
+        "无结构": "LZ_gy_wjg"
+      }
+    },
+    "驳头锁眼": {
+      "上衣": {
+        "艾伦眼": "SY_jacketButtonhole_aly",
+        "机器锁眼": "SY_jacketButtonhole_jqsy",
+        "手工米兰眼": "SY_jacketButtonhole_sgmly",
+        "不开口手工米兰眼": "SY_jacketButtonhole_bkksgmly",
+        "取消驳头锁眼": "SY_jacketButtonhole_qxbtsy",
+        "圆头锁眼": "SY_jacketButtonhole_ytsy",
+        "手工圆头锁眼": "SY_jacketButtonhole_qxytsy",
+        "双边米兰眼": "SY_jacketButtonhole_sbmly",
+        "手工圆头1.5cm圆头锁眼": "SY_jacketButtonhole_sgytsy1.5",
+        "手工圆头2cm圆头锁眼": "SY_jacketButtonhole_sgytsy2",
+        "双边手工圆头锁眼": "SY_jacketButtonhole_sbsgytsy"
+      },
+      "大衣": {
+        "艾伦眼": "DY_overcoatButtonHole_curvedHandmade",
+        "机器锁眼": "DY_overcoatButtonHole_machineMade ",
+        "手工米兰眼": "DY_overcoatButtonHole_milanese",
+        "双边米兰眼": "DY_overcoatButtonHole_sbly",
+        "取消驳头锁眼": "DY_overcoatButtonHole_cancelLapelButtonhole"
+      },
+      "猎装": {
+        "艾伦眼": "LZ_btsy_aly",
+        "机器锁眼": "LZ_btsy_yqsy",
+        "手工米兰眼": "LZ_btsy_sgmly",
+        "手工圆头锁眼": "LZ_btsy_sgytsy",
+        "圆头锁眼": "LZ_btsy_ytsy",
+        "双边米兰眼": "LZ_btsy_sbmly",
+        "取消驳头锁眼": "LZ_btsy_qxbtsy",
+        "手工圆头1.5圆头锁眼": "LZ_btsy_sgyt"
+      }
+    },
+    "上衣袖扣": {
+      "上衣": {
+        "贴边": "SY_jacketSleeveButton_tb",
+        "叠扣": "SY_jacketSleeveButton_dk",
+        "斜眼叠扣": "SY_jacketSleeveButton_slantBuckle",
+        "斜扣": "SY_jacketSleeveButton_diagonalBuckle",
+        "平扣": "SY_jacketSleeveButton_pk",
+        "袖克夫圆头": "SY_jacketSleeveButton_xfkjt",
+        "袖克夫尖头": "SY_jacketSleeveButton_xkf",
+        "斜眼平扣": "SY_jacketSleeveButton_xpk"
+      },
+      "猎装": {
+        "一扣": "LZ_syxk_xxyk",
+        "平扣": "LZ_syxk_pk",
+        "贴边": "LZ_syxk_tb",
+        "叠扣": "LZ_syxk_dk",
+        "斜扣": "LZ_syxk_xk",
+        "斜眼叠扣": "LZ_syxk_xdk",
+        "斜眼平扣": "LZ_syxk_xpk",
+        "袖克夫圆头": "LZ_syxk_xkfyt",
+        "袖克夫尖头": "LZ_syxk_xkfjt"
+      }
+    },
+    "脚口": {
+      "西裤": {
+        "平撬": "XK_hemOpening_pq",
+        "反撬": "XK_hemOpening_fq",
+        "斜裤脚": "XK_hemOpening_diagonalHem",
+        "松紧拉链": "XK_hemOpening_elasticZipper",
+        "裤子毛长": "XK_hemOpening_mc",
+        "同工艺书": "XK_hemOpening_ptys"
+      }
+    },
+    "裤子门襟": {
+      "西裤": {
+        "拉链": "XK_pantFrontFly_ll",
+        "纽扣": "XK_pantFrontFly_nk"
+      }
+    },
+    "裤子后口袋": {
+      "西裤": {
+        "双支线": "XK_pantBackPocket_szx",
+        "单支线": "XK_pantBackPocket_dzx",
+        "双支线加袋盖": "XK_pantBackPocket_dg",
+        "双支线口袋，口袋锁眼取消": "XK_pantBackPocket_szxkd",
+        "后袋取消": "XK_pantBackPocket_hdqx",
+        "明袋": "XK_pantBackPocket_md",
+        "后口袋锁眼取消": "XK_pantBackPocket_hdsyqx",
+        "右边单口袋": "XK_pantBackPocket_ybdkd",
+        "牛仔袋": "XK_pantBackPocket_nzd",
+        "同工艺书": "XK_pantBackPocket_tgys"
+      }
+    },
+    "表袋": {
+      "西裤": {
+        "普通表袋": "XK_pantsPocket_ptbd",
+        "袋盖": "XK_pantsPocket_dg",
+        "无表袋": "XK_pantsPocket_wbd",
+        "表袋袢": "XK_pantsPocket_bdp"
+      }
+    },
+    "后背款式": {
+      "大衣": {
+        "A款": "DY_hbks_akzy",
+        "4KN042 A款": "DY_hbks_ak042",
+        "4KN041 A款": "DY_hbks_ak",
+        "B款": "DY_hbks_bk",
+        "4KN041无腰带款": "DY_hbks_ak041",
+        "C款": "DY_hbks_ck",
+        "4KN993 A款": "DY_hbks_dazhonak",
+        "4KN045无叉款": "DY_hbks_wck045",
+        "4KN993 B款": "DY_hbks_dazhobk",
+        "4KN045中开叉": "DY_hbks_zkc045",
+        "4KN042 A腰带款": "DY_hbks_ak042yyd"
+      }
+    },
+    "门襟锁眼": {
+      "大衣": {
+        "一明扣三暗扣": "DY_placketKeyhole_ymksaks",
+        "一明扣四暗扣": "DY_placketKeyhole_ymksak",
+        "一扣": "DY_placketKeyhole_oneButton ",
+        "二扣": "DY_placketKeyhole_twoBuckles",
+        "二扣半": "DY_placketKeyhole_twoAndAHalfBuckles",
+        "三扣": "DY_placketKeyhole_sq",
+        "四扣": "DY_placketKeyhole_4b",
+        "四扣二": "DY_placketKeyhole_fourBucklesAndWwo",
+        "四扣一": "DY_placketKeyhole_fourBucklesAndone",
+        "六扣三": "DY_placketKeyhole_lks",
+        "六扣二": "DY_placketKeyhole_sixBucklesAndTwo",
+        "六扣一": "DY_placketKeyhole_sixBucklesAndOne",
+        "八扣四": "DY_placketKeyhole_bks",
+        "十扣三": "DY_placketKeyhole_sksnk",
+        "十扣五": "DY_placketKeyhole_sbkw"
+      },
+      "猎装": {
+        "一明扣四暗扣": "LZ_mjsy_1mksak",
+        "一扣": "LZ_mjsy_1b",
+        "二扣": "LZ_mjsy_2B",
+        "二扣半": "LZ_mjsy_2KB",
+        "二扣一": "LZ_mjsy_2ky",
+        "三扣": "LZ_mjsy_3sk",
+        "三扣二": "LZ_mjsy_3kr",
+        "四扣": "LZ_mjsy_4b",
+        "四扣二": "LZ_mjsy_4skr",
+        "四扣一": "LZ_mjsy_4ky",
+        "五扣": "LZ_mjsy_5k",
+        "六扣": "LZ_mjsy_lk",
+        "六扣二": "LZ_mjsy_6kr",
+        "六扣一": "LZ_mjsy_6ky",
+        "对扣": "LZ_mjsy_dk",
+        "一暗扣两明扣": "LZ_mjsy_yaklmk"
+      },
+      "上衣": {
+        "一扣半": "SY_placketKeyhole_1.5b",
+        "一扣": "SY_placketKeyhole_oneButton ",
+        "二扣一": "SY_placketKeyhole_erkouyi",
+        "二扣\t": "SY_placketKeyhole_twoBuckles",
+        "两扣半": "SY_placketKeyhole_twoAndAHalfButtons",
+        "三扣半": "SY_placketKeyhole_skb",
+        "三扣": "SY_placketKeyhole_sankou",
+        "三扣二": "SY_placketKeyhole_ske",
+        "四暗扣": "SY_placketKeyhole_sak",
+        "四扣": "SY_placketKeyhole_sk",
+        "四扣二": "SY_placketKeyhole_fourBucklesAndWwo",
+        "四扣一": "SY_placketKeyhole_fourBucklesAndone",
+        "五扣": "SY_placketKeyhole_wlk",
+        "六扣": "SY_placketKeyhole_mjsy6k",
+        "六扣三": "SY_placketKeyhole_6bno3",
+        "六扣二": "SY_placketKeyhole_sixBucklesAndTwo\t",
+        "六扣一": "SY_placketKeyhole_sixBucklesAndOne",
+        "八扣三": "SY_placketKeyhole_bks",
+        "对扣": "SY_placketKeyhole_mjsydk"
+      }
+    },
+    "上衣袖子": {
+      "猎装": {
+        "1SF035无袖里专用袖": "LZ_xz_1SF035wxlzyx",
+        "1SF035有袖里专用袖": "LZ_xz_1sf035wxl",
+        "A款袖克夫1扣": "LZ_xz_typec",
+        "B款袖开叉1扣": "LZ_xz_typea",
+        "C款无袖里袖克夫1扣": "LZ_xz_typeb",
+        "D款无袖里开叉一扣": "LZ_xz_akwxl",
+        "专用袖": "LZ_xz_zyx"
+      },
+      "上衣": {
+        "正常袖": "SY_jacketSleeveType_normal",
+        "自然肩": "SY_jacketSleeveType_naturalShoulder",
+        "衬衫肩": "SY_jacketSleeveType_shirtShoulder",
+        "KN翘袖": "SY_jacketSleeveType_knqx",
+        "衬衫肩+反上肩": "SY_jacketSleeveType_csjfsj",
+        "自然肩+反上肩": "SY_jacketSleeveType_fsj",
+        "无袖里自然肩": "SY_jacketSleeveType_wxlzrj",
+        "无袖里衬衫肩": "SY_jacketSleeveType_wxlcsj",
+        "斜袖一扣自然肩": "SY_jacketSleeveType_xxykzrj",
+        "斜袖一扣正常袖": "SY_jacketSleeveType_xxyk",
+        "AK溜肩袖": "SY_jacketSleeveType_ljx",
+        "AK翘袖": "SY_jacketSleeveType_akqjsc",
+        "无袖里袖山分缝": "SY_jacketSleeveType_wxlxsff",
+        "专用袖": "SY_jacketSleeveType_zyx",
+        "AK无袖里自然肩": "SY_jacketSleeveType_akwxlzrj",
+        "斜三角袖正常袖": "SY_jacketSleeveType_xsjx",
+        "斜三角袖自然肩": "SY_jacketSleeveType_xsjxzrj",
+        "瑞典自然袖": "SY_jacketSleeveType_rdzrx",
+        "TF翘袖": "SY_jacketSleeveType_tfqx",
+        "袖山分缝": "SY_jacketSleeveType_xsff"
+      }
+    },
+    "斜裤脚": {
+      "西裤": {
+        "是": "XK_curvedHem_1"
+      }
+    },
+    "裤腰样式": {
+      "西裤": {
+        "裤袢": "XK_waistStyle_kp",
+        "腰袢": "XK_waistStyle_yp",
+        "松紧": "XK_waistStyle_sj",
+        "后中开叉": "XK_waistStyle_hzkc",
+        "后中开叉两侧松紧": "XK_waistStyle_hzkclcsj",
+        "不开叉两侧松紧": "XK_waistStyle_bkc",
+        "连腰": "XK_waistStyle_lyk",
+        "全松紧": "XK_waistStyle_qsj",
+        "裤袢+腰袢": "XK_waistStyle_kpjyp"
+      }
+    },
+    "半里里布风格": {
+      "猎装": {
+        "一字后里": "LZ_bllbfg_yzhl",
+        "交叉后里": "LZ_bllbfg_jchl",
+        "前全里后半里": "LZ_bllbfg_qqlhbl"
+      },
+      "上衣": {
+        "一字后里": "SY_halfMileLiningStyle_yzhl",
+        "交叉后里": "SY_halfMileLiningStyle_jxhl",
+        "前全里后半里": "SY_halfMileLiningStyle_qqlhbl"
+      }
+    },
+    "袖弹": {
+      "猎装": {
+        "有袖弹": "LZ_xt_yxt",
+        "袖弹一层棉": "LZ_xt_xtycm",
+        "无袖弹": "LZ_xt_wxt"
+      },
+      "上衣": {
+        "袖弹一层棉": "SY_sleeveElastic_sleevePlaysALayerOfCotton",
+        "有袖弹": "SY_sleeveElastic_sleevedBullet",
+        "无袖弹": "SY_sleeveElastic_wxt",
+        "一层黑炭": "SY_sleeveElastic_ycht"
+      }
+    },
+    "袖口锁眼": {
+      "猎装": {
+        "一扣": "LZ_xksy_1b",
+        "二扣": "LZ_xksy_2b",
+        "三扣": "LZ_xksy_3b",
+        "四扣": "LZ_xksy_4B",
+        "五扣": "LZ_xksy_5B",
+        "六扣": "LZ_xksy_6B"
+      },
+      "上衣": {
+        "一扣\t": "SY_cuffKeyhole_oneButton",
+        "二扣\t ": "SY_cuffKeyhole_twoBuckles",
+        "三扣": "SY_cuffKeyhole_threeBuckles",
+        "四扣": "SY_cuffKeyhole_fourBuckles",
+        "五扣": "SY_cuffKeyhole_fiveBuckles",
+        "六扣": "SY_cuffKeyhole_6b"
+      },
+      "大衣": {
+        "一扣": "DY_cuffKeyhole_oneButton ",
+        "二扣": "DY_cuffKeyhole_twoBuckles",
+        "三扣": "DY_cuffKeyhole_threeBuckles",
+        "四扣": "DY_cuffKeyhole_fourBuckles",
+        "五扣": "DY_cuffKeyhole_fiveBuckles",
+        "无": "DY_cuffKeyhole_wu"
+      }
+    },
+    "上衣后叉": {
+      "猎装": {
+        "双开叉": "LZ_syhc_skc",
+        "中开叉": "LZ_syhc_zkc",
+        "不开叉": "LZ_syhc_bkc"
+      },
+      "上衣": {
+        "双开叉": "SY_jacketVent_doubleFork",
+        "中开叉": "SY_jacketVent_singleFork",
+        "不开叉": "SY_jacketVent_notForked"
+      }
+    },
+    "腰款式": {
+      "西裤": {
+        "A款:腰头长5CM，腰面宽3.5CM": "XK_yks_ak",
+        "B款:腰头长12CM，腰面宽5CM": "XK_yks_bkym",
+        "C款:无宝剑头，腰面宽3.5CM": "XK_yks_ckym",
+        "D款:腰头长22CM，腰面宽3.5CM": "XK_yks_dkym",
+        "E款:腰头长26CM，腰面宽5CM": "XK_yks_ekym",
+        "F款:交叉腰，腰头长25CM 腰面宽6CM": "XK_yks_fkym",
+        "G款:腰头长6CM，腰面宽3.5CM": "XK_yks_gkym",
+        "H款:腰头长12CM，腰面款3.5CM": "XK_yks_hkym",
+        "I款:腰头长12CM，腰宽3.5CM": "XK_yks_ikym",
+        "J款:双宝剑头，腰宽6CM": "XK_yks_jkym",
+        "K款:双宝剑头，双扣袢，腰宽6CM": "XK_yks_kkym",
+        "L款:腰头长11CM，腰宽5CM": "XK_yks_lkym",
+        "M款:腰头长10CM，腰宽3.5CM": "XK_yks_mkym",
+        "P款:腰头长26CM，腰宽5CM": "XK_yks_pkym",
+        "Q款:腰头长14CM，腰宽4CM": "XK_yks_qkym",
+        "S款:腰头长5CM，腰宽4CM": "XK_yks_skym",
+        "T款:腰头长16CM，腰宽5CM": "XK_yks_tkym",
+        "U款:腰头长25CM，腰宽6CM": "XK_yks_ukym",
+        "V款:腰袢，腰头长14CM，腰头处加一个裤袢，腰面宽5CM": "XK_yks_rdy",
+        "W款：腰袢，长7公分三角宝剑头，腰宽3.5CM": "XK_yks_rdak",
+        "X款：腰袢，长12公分三角宝剑头，腰头处加一个裤袢，腰宽3.5CM": "XK_yks_rdyak",
+        "Y款：腰头长12CM，腰面宽5CM": "XK_yks_YK",
+        "Z款：腰头长15CM，腰面宽3.5CM": "XK_yks_zk",
+        "AB款：腰面宽4CM;加腰带款": "XK_yks_aby",
+        "AC款:无宝剑头，腰面宽4.5CM": "XK_yks_ackwbjt",
+        "AD款：无宝剑头，腰面宽5CM": "XK_yks_adkwbjt",
+        "AE款:宝剑头长14CM，腰面宽4.5CM": "XK_yks_aek",
+        "AF款：无宝剑头，腰面宽3.5CM": "XK_yks_afk",
+        "AG款：无宝剑头，腰面宽4CM": "XK_yks_agk",
+        "AH款:交叉腰，宝剑头长28CM 腰面宽7CM": "XK_yks_ah",
+        "AI款：宝剑头长15CM，腰面宽4CM": "XK_yks_aik",
+        "AJ款:宝剑头长5CM，腰面宽3.5CM": "XK_yks_ajkyt",
+        "两侧松紧腰": "XK_yks_lcsjy",
+        "专用腰": "XK_yks_zyy",
+        "无腰款": "XK_yks_wyk",
+        "全松紧腰": "XK_yks_wsjy",
+        "活动腰": "XK_yks_hdy"
+      }
+    },
+    "下开袋": {
+      "马甲": {
+        "无": "MJ_xkd_wu",
+        "双支线开袋": "MJ_xkd_szxkd",
+        "两斜袋盖": "MJ_xkd_lxdg",
+        "下两明袋": "MJ_xkd_xlmd",
+        "手巾袋": "MJ_xkd_sjd",
+        "单支线开袋": "MJ_xkd_dzxkd",
+        "双支线加袋盖": "MJ_xkd_szxjdg",
+        "斜双支线开袋": "MJ_xkd_slantJetted",
+        "专用明袋": "MJ_xkd_zymd",
+        "弧形手巾袋": "MJ_xkd_barchetta"
+      }
+    },
+    "脚口加织带": {
+      "西裤": {
+        "织带": "XK_jkjzd_you",
+        "无": "XK_jkjzd_wu",
+        "本料": "XK_jkjzd_fabric",
+        "面料布边织带": "XK_jkjzd_mlbbzd"
+      }
+    },
+    "脚口平撬": {
+      "西裤": {
+        "2": "XK_Slide_2",
+        "3": "XK_Slide_pqs",
+        "4": "XK_Slide_4",
+        "5": "XK_Slide_5",
+        "6": "XK_Slide_6"
+      }
+    },
+    "马甲后叉": {
+      "马甲": {
+        "中开叉": "MJ_mjhx_zkc",
+        "不开叉": "MJ_mjhx_bkc",
+        "侧开叉": "MJ_mjhx_ckx",
+        "侧面和后中都开叉": "MJ_mjhx_czkc"
+      }
+    },
+    "脚口反撬": {
+      "西裤": {
+        "2": "XK_footOpeningReversed_2",
+        "3.5": "XK_footOpeningReversed_3.5",
+        "3": "XK_footOpeningReversed_3",
+        "4.5": "XK_footOpeningReversed_4.5",
+        "4": "XK_footOpeningReversed_4",
+        "5": "XK_footOpeningReversed_5",
+        "6": "XK_footOpeningReversed_6"
+      }
+    },
+    "": {
+      "西裤": {
+        "4": "XK_jkyx_4"
+      }
+    },
+    "背带扣": {
+      "西裤": {
+        "无": "XK_strapBuckle_notHave",
+        "有": "XK_strapBuckle_have"
+      }
+    }
+  },
+  "版型类型映射": {
+    "1": "SY",
+    "SY": "上衣",
+    "4": "DY",
+    "DY": "大衣",
+    "5": "MJ",
+    "MJ": "马甲",
+    "6": "XK",
+    "XK": "西裤",
+    "LZ": "猎装"
+  }
+}
