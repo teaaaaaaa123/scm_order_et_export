@@ -72,7 +72,7 @@ class TestFullProcess:
         
         self.wait = WebDriverWait(self.driver, 30)
         self.actions = ActionChains(self.driver)
-        self.serial_counter = self.load_serial_counter()  # 从文件加载上次保存的流水号
+        self.top_serial_counter, self.pants_serial_counter = self.load_serial_counter()  # 从文件加载上次保存的流水号
         self.production_no = ''  # 用于存储生产单号
     
     def load_serial_counter(self):
@@ -81,12 +81,22 @@ class TestFullProcess:
         serial_file = os.path.join(script_dir, 'serial_counter.txt')
         try:
             with open(serial_file, 'r') as f:
-                value = int(f.read().strip())
-                print(f'  已加载上次流水号：{value}')
-                return value
+                content = f.read().strip()
+                if content.isdigit():
+                    # 旧格式，只有一个流水号
+                    value = int(content)
+                    print(f'  已加载上次流水号：{value}')
+                    return value, value - 10000  # 西裤流水号 = 上衣流水号 - 10000
+                else:
+                    # 新格式，包含上衣和西裤流水号
+                    parts = content.split(',')
+                    top_serial = int(parts[0]) if len(parts) > 0 else 29999
+                    pants_serial = int(parts[1]) if len(parts) > 1 else 39999
+                    print(f'  已加载上次流水号：上衣类={top_serial}, 西裤={pants_serial}')
+                    return top_serial, pants_serial
         except (FileNotFoundError, ValueError):
-            print('  未找到流水号文件，使用默认值29999')
-            return 29999
+            print('  未找到流水号文件，使用默认值：上衣类=29999, 西裤=39999')
+            return 29999, 39999
     
     def save_serial_counter(self):
         """保存当前流水号到文件"""
@@ -94,8 +104,8 @@ class TestFullProcess:
         serial_file = os.path.join(script_dir, 'serial_counter.txt')
         try:
             with open(serial_file, 'w') as f:
-                f.write(str(self.serial_counter))
-            print(f'  流水号已保存：{self.serial_counter}')
+                f.write(f'{self.top_serial_counter},{self.pants_serial_counter}')
+            print(f'  流水号已保存：上衣类={self.top_serial_counter}, 西裤={self.pants_serial_counter}')
         except Exception as e:
             print(f'  ⚠ 保存流水号失败: {e}')
     
@@ -185,12 +195,31 @@ class TestFullProcess:
             return default_banxing_list
     
     def get_next_serial_num(self, banxing):
-        self.serial_counter += 1
-        if self.serial_counter >= 40000:
-            self.serial_counter = 30000
+        style_type = self.get_style_type(banxing)
+        
+        if style_type == '西裤':
+            # 西裤：40000-49999 循环
+            self.pants_serial_counter += 1
+            if self.pants_serial_counter > 49999:
+                self.pants_serial_counter = 40000
+            serial_num = self.pants_serial_counter
+        else:
+            # 上衣、马甲、大衣、猎装：30000-39999 循环
+            self.top_serial_counter += 1
+            if self.top_serial_counter > 39999:
+                self.top_serial_counter = 30000
+            serial_num = self.top_serial_counter
+        
         # 每次获取流水号后都保存
         self.save_serial_counter()
-        return str(self.serial_counter)
+        return str(serial_num)
+    
+    def get_paired_pants_serial(self):
+        """获取与当前上衣流水号配对的西裤流水号（上衣+10000）"""
+        pants_serial = self.top_serial_counter + 10000
+        if pants_serial > 49999:
+            pants_serial = 40000 + (pants_serial - 50000)
+        return str(pants_serial)
     
     def get_style_type(self, banxing):
         type_map = {
@@ -213,11 +242,11 @@ class TestFullProcess:
         
         if len(all_inputs) > 0:
             all_inputs[0].clear()
-            all_inputs[0].send_keys('Xx')
+            all_inputs[0].send_keys('AI下单')
         
         if len(all_inputs) > 1:
             all_inputs[1].clear()
-            all_inputs[1].send_keys('xx')
+            all_inputs[1].send_keys('123456')
         
         login_buttons = self.driver.find_elements(By.CSS_SELECTOR, 'button, .el-button')
         for btn in login_buttons:
@@ -1735,7 +1764,7 @@ class TestFullProcess:
         print('✓ 量体信息填写完成\n')
         return True
     
-    def save_detail(self):
+    def save_detail(self, banxing=None):
         print('【8】保存明细...')
         
         # 滚动到对话框最下方，确保按钮可见
@@ -1767,8 +1796,28 @@ class TestFullProcess:
         for attempt in range(3):
             # 第一次尝试保存（或者是重试）
             if attempt > 0:
-                self.serial_counter += 1
-                new_serial_num = str(self.serial_counter)
+                # 根据版型类型递增对应的流水号
+                if banxing:
+                    style_type = self.get_style_type(banxing)
+                    if style_type == '西裤':
+                        self.pants_serial_counter += 1
+                        if self.pants_serial_counter > 49999:
+                            self.pants_serial_counter = 40000
+                        new_serial_num = str(self.pants_serial_counter)
+                    else:
+                        self.top_serial_counter += 1
+                        if self.top_serial_counter > 39999:
+                            self.top_serial_counter = 30000
+                        new_serial_num = str(self.top_serial_counter)
+                    # 保存更新后的流水号
+                    self.save_serial_counter()
+                else:
+                    # 兼容旧代码，使用上衣流水号
+                    self.top_serial_counter += 1
+                    if self.top_serial_counter > 39999:
+                        self.top_serial_counter = 30000
+                    new_serial_num = str(self.top_serial_counter)
+                    self.save_serial_counter()
                 print(f'  第{attempt+1}次尝试，递增流水号到: {new_serial_num}')
                 
                 # 更新流水号输入框
@@ -2192,7 +2241,7 @@ class TestFullProcess:
                 self.enter_liangti_info(chima_size, style_type, luocha, liangti_data)
                 
                 # 保存明细
-                save_success = self.save_detail()
+                save_success = self.save_detail(banxing)
                 
                 if not save_success:
                     print(f'❌ 第{idx}个版型 {banxing} 保存失败，终止流程')
