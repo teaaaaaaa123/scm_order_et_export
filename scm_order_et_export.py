@@ -74,6 +74,7 @@ class TestFullProcess:
         self.actions = ActionChains(self.driver)
         self.top_serial_counter, self.pants_serial_counter = self.load_serial_counter()  # 从文件加载上次保存的流水号
         self.production_no = ''  # 用于存储生产单号
+        self.last_top_serial = None  # 记录当前订单中最后使用的上衣流水号（用于配对西裤）
     
     def load_serial_counter(self):
         """从文件加载上次保存的流水号"""
@@ -198,17 +199,33 @@ class TestFullProcess:
         style_type = self.get_style_type(banxing)
         
         if style_type == '西裤':
-            # 西裤：40000-49999 循环
-            self.pants_serial_counter += 1
-            if self.pants_serial_counter > 49999:
-                self.pants_serial_counter = 40000
-            serial_num = self.pants_serial_counter
+            # 西裤：检查是否有配对的上衣流水号
+            if self.last_top_serial is not None:
+                # 使用配对号：上衣号 + 10000
+                serial_num = self.last_top_serial + 10000
+                print(f'  西裤使用配对流水号：{serial_num}（上衣{self.last_top_serial}+10000）')
+                # 更新西裤计数器到下一组
+                self.pants_serial_counter = serial_num
+                # 重置配对标记（同一上衣只配对一次西裤）
+                self.last_top_serial = None
+            else:
+                # 单独西裤：从400xx占一个组位
+                self.pants_serial_counter += 1
+                if self.pants_serial_counter > 49999:
+                    self.pants_serial_counter = 40000
+                serial_num = self.pants_serial_counter
+                # 同时跳过对应的上衣号（300xx）
+                self.top_serial_counter = serial_num - 10000
+                print(f'  单独西裤流水号：{serial_num}，同时跳过上衣号{self.top_serial_counter}')
         else:
             # 上衣、马甲、大衣、猎装：30000-39999 循环
             self.top_serial_counter += 1
             if self.top_serial_counter > 39999:
                 self.top_serial_counter = 30000
             serial_num = self.top_serial_counter
+            # 记录当前上衣流水号，供后续西裤配对使用
+            self.last_top_serial = serial_num
+            print(f'  上衣类流水号：{serial_num}')
         
         # 每次获取流水号后都保存
         self.save_serial_counter()
@@ -2251,6 +2268,9 @@ class TestFullProcess:
             
             print('\n✓ 所有版型处理完成！')
             
+            # 重置配对标记，确保下一个订单重新开始配对
+            self.last_top_serial = None
+            
             # 先读取并存储生产单号
             print('\n【读取生产单号】')
             production_no = self.get_production_no()
@@ -2486,13 +2506,13 @@ class TestFullProcess:
         return fabric_consumption
 
     def test_fabric_consumption(self, production_no):
-        """测试获取面料耗量（每5分钟查询一次，最多查询5次）"""
+        """测试获取面料耗量（每1分钟查询一次，最多查询20次）"""
         print('=== 获取面料耗量测试 ===\n')
         
         try:
             # 配置参数
-            query_interval_minutes = 5  # 每次查询间隔5分钟
-            max_query_count = 5  # 最多查询5次
+            query_interval_minutes = 1  # 每次查询间隔1分钟
+            max_query_count = 20  # 最多查询20次
             
             fabric_consumption = None
             query_success = False
