@@ -640,20 +640,20 @@ class TestFullProcess:
         # 优先使用传入的参数，若无则从配置文件读取，最后使用默认值
         if hasattr(self, 'config'):
             fabric_width = fabric_width if fabric_width is not None else self.config.get('fabricWidth', 74)
-            fabric_no = fabric_no if fabric_no is not None else self.config.get('fabricNo', 'ET 算料')
-            lining_no = self.config.get('liningNo', 'ET 算料')
+            fabric_no = fabric_no if fabric_no is not None else self.config.get('fabricNo', '面料ET算料')
+            lining_no = self.config.get('liningNo', '里布ET算料')
             color = self.config.get('color', '10-黑')
             fabric_style = fabric_style if fabric_style is not None else self.config.get('fabricStyle', '平板')
             fabric_supply = self.config.get('fabricSupply', '库存面料')
-            sleeve_lining = self.config.get('sleeveLining', 'ET 算料')
+            sleeve_lining = self.config.get('sleeveLining', '袖里ET算料')
         else:
             fabric_width = fabric_width if fabric_width is not None else 74
-            fabric_no = fabric_no if fabric_no is not None else 'ET 算料'
-            lining_no = 'ET 算料'
+            fabric_no = fabric_no if fabric_no is not None else '面料ET算料'
+            lining_no = '里布ET算料'
             color = '10-黑'
             fabric_style = fabric_style if fabric_style is not None else '平板'
             fabric_supply = '库存面料'
-            sleeve_lining = 'ET 算料'
+            sleeve_lining = '袖里ET算料'
         
         print('  开始填写各字段...')
         self.fill_dropdown('款式类型', style_type)
