@@ -259,11 +259,11 @@ class TestFullProcess:
         
         if len(all_inputs) > 0:
             all_inputs[0].clear()
-            all_inputs[0].send_keys('AI下单')
+            all_inputs[0].send_keys('xx')
         
         if len(all_inputs) > 1:
             all_inputs[1].clear()
-            all_inputs[1].send_keys('123456')
+            all_inputs[1].send_keys('xx')
         
         login_buttons = self.driver.find_elements(By.CSS_SELECTOR, 'button, .el-button')
         for btn in login_buttons:
