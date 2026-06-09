@@ -1,3 +1,72 @@
+---
+name: SCM订单导出工具
+description: 基于Selenium的SCM订单自动化导出工具，支持自动填写订单信息、添加版型明细、填写量体数据、确认下单并导出ET
+author: Trae AI
+version: 1.0.0
+skillType: automation
+tags: ["SCM", "订单", "导出", "ET", "面料耗量"]
+input:
+  type: object
+  properties:
+    banxingConfigs:
+      type: array
+      description: 版型配置列表
+      items:
+        type: object
+        properties:
+          banxing:
+            type: string
+            description: 版型号
+          chimaSize:
+            type: string
+            description: 尺码
+          luocha:
+            type: string
+            description: 落差(R/C/-)
+          fabricWidth:
+            type: integer
+            description: 门幅
+          fabricNo:
+            type: string
+            description: 面料编号
+          fabricStyle:
+            type: string
+            description: 面料风格
+          customOptions:
+            type: object
+            description: 定制选项
+          liangtiData:
+            type: object
+            description: 量体数据
+    chimaSize:
+      type: string
+      description: 默认尺码
+    fabricWidth:
+      type: integer
+      description: 默认门幅
+    fabricNo:
+      type: string
+      description: 默认面料编号
+    fabricStyle:
+      type: string
+      description: 默认面料风格
+output:
+  type: object
+  properties:
+    success:
+      type: boolean
+      description: 是否执行成功
+    output:
+      type: string
+      description: 执行输出日志
+    error:
+      type: string
+      description: 错误信息
+    production_no:
+      type: string
+      description: 生成的生产单号
+---
+
 # SCM订单导出工具
 
 基于Selenium的SCM订单自动化导出工具，用于自动填写订单信息、添加版型明细、填写量体数据、确认下单并导出ET。
@@ -38,8 +107,31 @@ pip install selenium webdriver-manager
 
 ## 使用方法
 
-1. 修改 `config.json` 配置文件
-2. 运行主程序：
+### 通过OpenClaw调用
+
+```python
+from skill import run_skill
+
+params = {
+    "banxingConfigs": [
+        {
+            "banxing": "1KN003",
+            "chimaSize": "50",
+            "luocha": "R",
+            "fabricWidth": 74,
+            "fabricNo": "ET算料",
+            "fabricStyle": "平板",
+            "customOptions": {},
+            "liangtiData": {"fullBust": "+5"}
+        }
+    ]
+}
+
+result = run_skill(params)
+print(result)
+```
+
+### 直接运行
 
 ```bash
 python scm_order_et_export.py
@@ -57,6 +149,12 @@ python scm_order_et_export.py
 5. **确认下单** - 在订单列表确认订单
 6. **ET导出** - 导航到ET导出管理页面
 7. **获取面料耗量** - 每5分钟查询一次，最多5次
+
+## 流水号规则
+
+- **上衣、马甲、大衣、猎装**：30000-39999 循环使用
+- **西裤**：40000-49999 循环使用
+- **配对关系**：上衣流水号 + 10000 = 对应西裤流水号（如上衣30000 → 西裤40000）
 
 ## config.json 配置示例
 
