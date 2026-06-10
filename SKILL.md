@@ -5,6 +5,7 @@ author: Trae AI
 version: 1.0.0
 skillType: automation
 tags: ["SCM", "订单", "导出", "ET", "面料耗量"]
+trigger: "帮我下单计算面料耗量"
 input:
   type: object
   properties:
